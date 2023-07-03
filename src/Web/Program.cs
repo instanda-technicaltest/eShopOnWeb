@@ -21,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddConsole();
 
-Microsoft.eShopWeb.Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
+Microsoft.eShopWeb.Infrastructure.Dependencies.ConfigureServices(builder.Environment.EnvironmentName, builder.Configuration, builder.Services);
 
 builder.Services.AddCookieSettings();
 
@@ -169,6 +169,10 @@ using (var scope = app.Services.CreateScope())
     {
         var catalogContext = scopedProvider.GetRequiredService<CatalogContext>();
         await CatalogContextSeed.SeedAsync(catalogContext, app.Logger);
+
+        var identityDbContext = scopedProvider.GetRequiredService<AppIdentityDbContext>();
+
+        await identityDbContext.Database.EnsureCreatedAsync();
 
         var userManager = scopedProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = scopedProvider.GetRequiredService<RoleManager<IdentityRole>>();
