@@ -55,32 +55,16 @@ You can also run the samples in Docker (see below).
 
 ### Configuring the sample to use SQL Server
 
-1. By default, the project uses a real database. If you want an in memory database, you can add in `appsettings.json`
+1. By default, the project uses an in-memory database. If you want to use SQL Server, you can update the setting in `appsettings.json` in /src/Web/ and /src/PublicApi/
 
     ```json
    {
-       "UseOnlyInMemoryDatabase": true
+       "UseOnlyInMemoryDatabase": false
    }
 
     ```
 
 1. Ensure your connection strings in `appsettings.json` point to a local SQL Server instance.
-1. Ensure the tool EF was already installed. You can find some help [here](https://docs.microsoft.com/ef/core/miscellaneous/cli/dotnet)
-
-    ```
-    dotnet tool install --global dotnet-ef
-    ```
-
-1. Open a command prompt in the Web folder and execute the following commands:
-
-    ```
-    dotnet restore
-    dotnet tool restore
-    dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
-    dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
-    ```
-
-    These commands will create two separate databases, one for the store's catalog data and shopping cart information, and one for the app's user credentials and identity data.
 
 1. Run the application.
 
@@ -101,10 +85,10 @@ You can run the Web sample by running these commands from the root folder (where
 
 ```
 docker-compose build
-docker-compose up
+docker-compose up -d
 ```
 
-You should be able to make requests to localhost:5106 for the Web project, and localhost:5200 for the Public API project once these commands complete. If you have any problems, especially with login, try from a new guest or incognito browser instance.
+You should be able to make requests to `localhost:5106` for the Web project, and `localhost:5200/swagger` for the Public API project once these commands complete. If you have any problems, especially with login, try from a new guest or incognito browser instance.
 
 You can also run the applications by using the instructions located in their `Dockerfile` file in the root of each project. Again, run these commands from the root of the solution (where the .sln file is located).
 
