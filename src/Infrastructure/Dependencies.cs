@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.eShopWeb.Infrastructure.Data;
 using Microsoft.eShopWeb.Infrastructure.Identity;
 using Microsoft.Extensions.Configuration;
@@ -8,8 +9,15 @@ namespace Microsoft.eShopWeb.Infrastructure;
 
 public static class Dependencies
 {
-    public static void ConfigureServices(IConfiguration configuration, IServiceCollection services)
+    public static void ConfigureServices(string environmentName, IConfiguration configuration, IServiceCollection services)
     {
+        var dbServerConnection = new SqlConnectionStringBuilder
+        {
+            DataSource = "localhost",
+            UserID = "sa",
+            Password = "sup3rs3cr3t!"
+        };
+
         var useOnlyInMemoryDatabase = false;
         if (configuration["UseOnlyInMemoryDatabase"] != null)
         {
@@ -19,10 +27,29 @@ public static class Dependencies
         if (useOnlyInMemoryDatabase)
         {
             services.AddDbContext<CatalogContext>(c =>
-               c.UseInMemoryDatabase("Catalog"));
-         
+                c.UseInMemoryDatabase("Catalog"));
+
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseInMemoryDatabase("Identity"));
+        }
+        else if (environmentName.ToLower() == "docker")
+        {
+            var eShopDb = new SqlConnectionStringBuilder(dbServerConnection.ConnectionString)
+            {
+                DataSource = "sqlserver",
+                InitialCatalog = "eShopDB"
+            };
+
+            var identityDb = new SqlConnectionStringBuilder(eShopDb.ConnectionString)
+            {
+                InitialCatalog = "eShopIdentityDB"
+            };
+
+            services.AddDbContext<CatalogContext>(c =>
+                c.UseSqlServer(eShopDb.ConnectionString));
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseSqlServer(identityDb.ConnectionString));
         }
         else
         {
@@ -31,7 +58,6 @@ public static class Dependencies
             // https://www.microsoft.com/en-us/download/details.aspx?id=54284
             services.AddDbContext<CatalogContext>(c =>
                 c.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
-
             // Add Identity DbContext
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));

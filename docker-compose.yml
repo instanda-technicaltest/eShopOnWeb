@@ -1,25 +1,28 @@
 version: '3.4'
 
 services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      MSSQL_PID: "Standard"
+      SA_PASSWORD: "sup3rs3cr3t!"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - 1433:1433
+    mem_limit: 4096M
+
   eshopwebmvc:
+    depends_on:
+    - sqlserver
     image: ${DOCKER_REGISTRY-}eshopwebmvc
     build:
       context: .
       dockerfile: src/Web/Dockerfile
-    depends_on:
-      - "sqlserver"
   eshoppublicapi:
+    depends_on:
+    - sqlserver
     image: ${DOCKER_REGISTRY-}eshoppublicapi
     build:
       context: .
       dockerfile: src/PublicApi/Dockerfile
-    depends_on:
-      - "sqlserver"
-  sqlserver:
-    image: mcr.microsoft.com/azure-sql-edge
-    ports:
-      - "1433:1433"
-    environment:
-      - SA_PASSWORD=@someThingComplicated1234
-      - ACCEPT_EULA=Y
-
