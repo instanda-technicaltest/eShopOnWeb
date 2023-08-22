@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShoponWeb", "eShoponWeb\eShoponWeb.csproj", "{332F9A4F-3306-4AD5-A8B0-2004B160F720}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShoponWeb", "eShoponWeb\eShoponWeb.csproj", "{332F9A4F-3306-4AD5-A8B0-2004B160F720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

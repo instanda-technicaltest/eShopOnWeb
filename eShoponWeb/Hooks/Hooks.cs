@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace eShoponWeb.Hooks;
+
 [Binding]
 public sealed class HookInitialization
 {
@@ -11,20 +12,23 @@ public sealed class HookInitialization
     public HookInitialization(ScenarioContext scenarioContext) => _scenarioContext = scenarioContext;
 
     [BeforeScenario("@tag1")]
-    
+
     public void BeforeScenarioWithTag()
     {
-        SeleniumDriver seleniumDriver = new SeleniumDriver(_scenarioContext);
+        Base seleniumDriver = new Base(_scenarioContext);
         _scenarioContext.Set(seleniumDriver, "SeleniumDriver");
     }
 
-   
+
 
     [AfterScenario]
     public void AfterScenario()
     {
         Console.WriteLine("Selenium Webdriver quit");
         _scenarioContext.Get<IWebDriver>("Webdriver").Quit();
-        
+
     }
+
 }
+
+
