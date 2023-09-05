@@ -16,13 +16,14 @@ import java.util.Properties;
 public class CommonFunctions {
 
     // ***********************************************************************
-
-    String filePath;
- 
+    // Global Variables
+    String filePath; 
     static String mb;
 
     //***********************************************************************
-    public static WebDriver driver;              // Global declaration Driver
+    // Global declaration Driver
+    public static WebDriver driver;  
+                
     //***********************************************************************
     //Method to initiate the browser
     public void openBrowse()          
