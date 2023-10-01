@@ -8,10 +8,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import helper.Reporter;
 import helper.UserInteractions;
 
 public class EShopWeb extends UserInteractions{
@@ -35,15 +31,15 @@ public class EShopWeb extends UserInteractions{
 	}
 
 	public void filterBrand(String option) throws Exception {
-		click(brandFilterBy, "Brand Filter", 10);
+		click(brandFilterBy, "Brand Filter");
 		By by = By.xpath(brandFilterOptionString.replace("%s%", option));
-		click(by, "Brand Filter option", 10);	
+		click(by, "For brand Filter, "+option+" option", 10);	
 	}
 
 	public void filterType(String option) throws Exception {
-		click(typeFilterBy,"Type Filter", 10);
+		click(typeFilterBy,"Type Filter");
 		By by = By.xpath(TypeFilterOptionString.replace("%s%", option));
-		click(by, "Type Filter option", 10);		
+		click(by, "For type Filter, "+option+" option", 10);		
 	}
 
 	public void clickFilterButton() throws Exception {
@@ -73,6 +69,11 @@ public class EShopWeb extends UserInteractions{
 		List<WebElement> elements =  getElements(FilterdProductLabelsBy);
 		String[] products = new String[elements.size()];
 		for(int i=0;i<elements.size();i++) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView()", elements.get(i));
+			js.executeScript("arguments[0].style.border='2px solid red'", elements.get(i)); 
+			js.executeScript("arguments[0].style.border='0px solid red'", elements.get(i)); 
+			
 			products[i]=elements.get(i).getText();
 		}
 		Arrays.sort(products);
@@ -94,7 +95,7 @@ public class EShopWeb extends UserInteractions{
 			else
 				expectedList=expectedList+", "+expected[i];		
 		}
-		CompareString(actualList,expectedList,"Names of filtered products");
+		CompareString(actualList,expectedList.toUpperCase(),"Names of filtered products");
 	}
 
 	
@@ -106,25 +107,24 @@ public class EShopWeb extends UserInteractions{
 		for(int i=0;i<products.length;i++) {
 			By by = By.xpath(FilterdProductPriceLabelsBy.replace("%s%", products[i]));
 			WebElement element = getElement(by,"price label of "+products[i]);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView()", element);
+			js.executeScript("arguments[0].style.border='2px solid red'", element);
+			js.executeScript("arguments[0].style.border='0px solid red'", element); 
+			
 			String actualprice = element.getText();
-			CompareString(actualprice,prices[i],"Result Age");
+			CompareString(actualprice,prices[i],"Price of filtered product");
 		}	
 	}
 	
 	public void clickAddToBasket(String product) throws Exception {
-		System.out.println(addToBasketByString.replace("%s%", product));
+
 		By addToBasketBy = By.xpath(addToBasketByString.replace("%s%", product));
-		wait = new WebDriverWait(driver, 10);
-			WebElement element =wait.until(ExpectedConditions.elementToBeClickable(addToBasketBy));
-			try {
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("arguments[0].scrollIntoView()", element);
-				js.executeScript("arguments[0].style.border='2px solid red'", element); 
-				js.executeScript("arguments[0].click();", element);
-				}catch(Exception e) {
-					System.out.println(e.getClass());
-				}
+		jsClick(addToBasketBy,"Add to basket button",10);
+		
 	}
+
+	
 
 	public void validateCountInBasket(int i) throws Exception {
 		String actualCount = getElement(basketCountBy,"Basket Count").getText();

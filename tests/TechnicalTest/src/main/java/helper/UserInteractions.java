@@ -54,6 +54,28 @@ public class UserInteractions {
 			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" as "+e.getClass(), takeSnapShot());
 		}	
 		}
+	public void jsInputKeys(String input, By by, String elementName, int time) throws Exception {
+		try {
+			wait = new WebDriverWait(driver, time);
+		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
+		
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver; 
+		jsExecutor.executeScript("arguments[0].scrollIntoView()", element); 
+		
+		Thread.sleep(100);
+		driver.switchTo().activeElement().sendKeys(Keys.TAB);
+		driver.switchTo().activeElement().sendKeys(input);
+		Reporter.report("Pass","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" entered in "+ elementName, takeSnapShot());	
+	
+		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element); 
+		}catch (TimeoutException e){
+			e.printStackTrace();
+			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" due to "+e.getClass(), takeSnapShot());
+		}catch (Exception e){
+			e.printStackTrace();
+			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" as "+e.getClass(), takeSnapShot());
+		}	
+		}
 	
 	public void activeInputKeys(String input) throws Exception {
 		try {
@@ -131,6 +153,25 @@ public class UserInteractions {
 		
 	}
 	
+	public void jsClick(By by, String elementDescription, int i) throws IOException {
+		// TODO Auto-generated method stub
+		wait = new WebDriverWait(driver, 10);
+		WebElement element =wait.until(ExpectedConditions.elementToBeClickable(by));
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView()", element);
+			js.executeScript("arguments[0].style.border='2px solid red'", element); 
+			String snap = takeSnapShot();
+			js.executeScript("arguments[0].click();", element);
+			Reporter.report("Pass",elementDescription +" should be clicked", elementDescription +" clicked",snap);	
+
+			}catch(Exception e) {
+				System.out.println(e.getClass());
+				Reporter.report("Fail",elementDescription +" should be clicked", elementDescription +" could not be clicked", takeSnapShot());	
+				
+			}
+	}
+	
 	public void click(By by, String elementName) throws Exception {
 		wait = new WebDriverWait(driver, 10);
 		try {
@@ -173,6 +214,32 @@ public class UserInteractions {
 			WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
 			
 			JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;  
+			jsExecutor.executeScript("arguments[0].scrollIntoView()", element);
+			jsExecutor.executeScript("arguments[0].style.border='2px solid red'", element);   		
+//			Reporter.report("Pass",elementName +" should be present", elementName +" was present", takeSnapShot());		
+			jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element);  
+			return element;
+			
+	}catch (TimeoutException e){
+		e.printStackTrace();
+		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		}catch (Exception e){
+		e.printStackTrace();
+		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		
+		}
+		return null;
+		
+	}
+	
+	
+	public WebElement getElement(By by, String elementName, int time) throws Exception {
+		wait = new WebDriverWait(driver, time);
+		try {
+			WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
+			
+			JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;  
+			jsExecutor.executeScript("arguments[0].scrollIntoView()", element);
 			jsExecutor.executeScript("arguments[0].style.border='2px solid red'", element);   		
 			Reporter.report("Pass",elementName +" should be present", elementName +" was present", takeSnapShot());		
 			jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element);  
@@ -189,7 +256,6 @@ public class UserInteractions {
 		return null;
 		
 	}
-	
 
 	public void checkBoxSelection(boolean state, By by, String elementName, int time) throws Exception {
 		wait = new WebDriverWait(driver, time);
@@ -372,9 +438,7 @@ public class UserInteractions {
 		}catch (TimeoutException e){
 			Reporter.report("Fail","<b> elements with by "+by +"</b>"+" should be present", "<b> elements with by "+by +"</b>"+" was not present", takeSnapShot());			
 		return null;
-		}
-		
-		
+		}		
 	}
 	
 	public void CompareString(String actual,String expected,String comment) throws Exception {

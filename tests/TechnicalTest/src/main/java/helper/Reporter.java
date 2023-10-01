@@ -77,7 +77,7 @@ public class Reporter {
 	}
 	
 	public static void addStepsToReport() {
-		try {
+	
 			for (int i = 0; i < details.size();i++) {
 				try {
 				String scrPath = details.get(i).getScreenPath();
@@ -86,14 +86,11 @@ public class Reporter {
 			} catch(NullPointerException e) {
 				reportIn = reportIn.replaceFirst(resultPlaceholder,"<tr><td>" + Integer.toString(i+1)  + "</td><td>" + details.get(i).getExpectedResult() + "</td><td>"+ details.get(i).getActualResult() + "</td>"+ "</td><td>" + details.get(i).getResult()+"</tr>" + resultPlaceholder);
 					
+			}catch (Exception e) {
+				e.getClass();
 			}
 			}
 			
-			
-		} catch (Exception e) {
-
-			System.out.println("Error when writing report file:\n" + e.toString());
-		}
 	}
 	
 

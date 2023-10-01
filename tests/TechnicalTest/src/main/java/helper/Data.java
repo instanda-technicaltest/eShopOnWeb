@@ -20,7 +20,7 @@ public class Data {
 	}
 
 	 public void setData(String sheetName, String scenarioName) {
-		 System.out.println("In given"+scenarioName);
+//		 System.out.println("In given"+scenarioName);
 			String filePath = System.getProperty("user.dir")+"\\src\\main\\resources\\data";
 			Data data = new Data();
 			try {
@@ -31,7 +31,7 @@ public class Data {
 	}
 	 
 	 public void setData(String scenarioName) {
-		 System.out.println("In given"+scenarioName);
+//		 System.out.println("In given"+scenarioName);
 			String filePath = System.getProperty("user.dir")+"\\src\\main\\resources\\data";
 			Data data = new Data();
 			try {
@@ -48,16 +48,15 @@ public class Data {
 		book = new HSSFWorkbook(input);
 		Sheet sheet = book.getSheet(sheetName);
 		int rowCount = sheet.getLastRowNum()-sheet.getFirstRowNum();
-
+System.out.println(rowCount);
 		for (int i = 0; i < rowCount+1; i++) {
 			Row row = sheet.getRow(i);
-			
+//			System.out.println(row.getCell(0).getStringCellValue());
 			if(row.getCell(0).getStringCellValue().equals(testCaseName)) {
 				Row headRow = sheet.getRow(0);
 				for (int j = 0; j <= row.getLastCellNum()+1; j++) {
 					try {
-						System.out.println(row.getCell(j).getStringCellValue());
-					map.put(headRow.getCell(j).getStringCellValue(),row.getCell(j).getStringCellValue());
+						map.put(headRow.getCell(j).getStringCellValue(),row.getCell(j).getStringCellValue());
 					}catch(Exception e) {
 					}
 				}

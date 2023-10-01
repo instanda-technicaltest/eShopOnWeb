@@ -1,24 +1,22 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.JavascriptExecutor;
+import java.io.IOException;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import helper.UserInteractions;
 
 public class EShopWebBasketPage extends UserInteractions {
 
 	private static final String productNameLabel = "//article[@class='esh-basket-items row']//section[contains(@class,'col-xs-3')][text()='%s%']";
 	private static final String productPriceLabel = "//section[contains(@class,'col-xs-3')][text()='%s%']//parent::div/section[contains(@class,'col-xs-2')][1]";
-	private static final String productQuantityLabel = "//section[contains(@class,'col-xs-3')][text()='%s%']//parent::div/section[contains(@class,'col-xs-2')][2]";
+	private static final String productQuantityLabel = "//section[contains(@class,'col-xs-3')][text()='%s%']//parent::div/section[contains(@class,'col-xs-2')][2]/input[2]";
 	private static final String productTotalPriceLabel = "//section[contains(@class,'col-xs-3')][text()='%s%']//parent::div/section[contains(@class,'col-xs-2')][3]";
 	private static final By totalCartPriceBy = By.xpath("//article[@class='esh-basket-items row']/section[contains(@class,'mark col-xs-2')]");
 	private static final By updateButtonBy = By.xpath("//button[@name='updatebutton']");
 	private static final By conitnueShopppingButton = By.xpath("//a[@class='btn esh-basket-checkout text-white']");
 	private static final By checkOutButtonBy = By.xpath("//a[@class='btn esh-basket-checkout']");
+	private static final String productQuantityField = "//section[contains(@class,'col-xs-3')][text()='%s%']//parent::div/section[contains(@class,'col-xs-2')][2]";
 
 
 	public EShopWebBasketPage(WebDriver driver) {
@@ -34,15 +32,15 @@ public class EShopWebBasketPage extends UserInteractions {
 	public void validatePriceinCart(String Product, String price) throws Exception {
 		
 		By by =By.xpath(productPriceLabel.replace("%s%",Product));
-		String actualPrice = getElement(by, "Product Price Label").getText();
-		CompareString(actualPrice, price, "Product Name label in cart");				
+		String actualPrice = getElement(by, "Product Price Label").getText().replace("$ ", "");
+		CompareString(actualPrice, price, "Product Price label in cart");				
 	}
 
 	public void validateQuantityinCart(String Product, int quantity) throws Exception {
 		
 		By by =By.xpath(productQuantityLabel.replace("%s%",Product));
-		String actualQuantity = getElement(by, "Product Quantity Label").getText();
-		CompareString(actualQuantity, quantity+"", "Product Name label in cart");
+		String actualQuantity = getElement(by, "Product Quantity Label").getAttribute("value");
+		CompareString(actualQuantity, quantity+"", "Product Quantity label in cart");
 	}
 
 	public void validateTotalPriceOfProductinCart(String Product, double expectedPrice) throws Exception {
@@ -57,58 +55,20 @@ public class EShopWebBasketPage extends UserInteractions {
 	}
 
 	public void setQuantitiesOfProduct(String product, String quantity, int count) throws Exception {
-		By by =By.xpath(productQuantityLabel.replace("%s%",product));
-		WebElement element = driver.findElement(by);
-		try {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView()", element);
-		}catch(Exception e) {
-			System.out.println(e.getClass());
-		}
-		Thread.sleep(100);
-		driver.switchTo().activeElement().sendKeys(Keys.TAB);
-		driver.switchTo().activeElement().sendKeys(quantity);
-
+		By by =By.xpath(productQuantityField.replace("%s%",product));
+		jsInputKeys(quantity,by,"Required Quantity of Product",10);
 	}
 
 	public void clickUpdateButton(int count) throws Exception {
-		
-		WebElement element = driver.findElement(updateButtonBy);
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView()", element);
-			js.executeScript("arguments[0].style.border='2px solid red'", element); 
-			js.executeScript("arguments[0].click();", element);
-			}catch(Exception e) {
-				System.out.println(e.getClass());
-			}
+		jsClick(updateButtonBy,"Update button",10);
 	}
 
 	public void clickOnContinueShoping(int count) throws Exception {
-		// TODO Auto-generated method stub
-		
-		WebElement element = driver.findElement(conitnueShopppingButton);
-		try {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView()", element);
-		js.executeScript("arguments[0].style.border='2px solid red'", element); 
-		js.executeScript("arguments[0].click();", element);
-		}catch(Exception e) {
-			System.out.println(e.getClass());
-		}
+		jsClick(conitnueShopppingButton,"Continue shopping button",10);
 	
 	}
-	public void clickCheckOutButton() throws InterruptedException {
-//		Thread.sleep(100);
-		WebElement element = driver.findElement(checkOutButtonBy);
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView()", element);
-			js.executeScript("arguments[0].style.border='2px solid red'", element); 
-			js.executeScript("arguments[0].click();", element);
-			}catch(Exception e) {
-				System.out.println(e.getClass());
-			}
+	public void clickCheckOutButton() throws InterruptedException, IOException {
+		jsClick(checkOutButtonBy,"Checkout button",10);
 	}
 		
 	

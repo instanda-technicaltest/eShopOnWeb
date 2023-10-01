@@ -7,6 +7,7 @@ import pages.EShopWeb;
 import pages.EShopWebBasketPage;
 import pages.EShopWebCheckOutPage;
 import pages.EShopWebReviewPage;
+import java.time.LocalDateTime;
 
 
 public class ProductSelectionFlow    {
@@ -18,6 +19,7 @@ public class ProductSelectionFlow    {
 	}
 	static int basketCount=0;
 	static double totalCartPrice = 0.00;
+	static String checkOutTime = "";
 	Data data = new Data();
 	
 	String[] RequiredProducts = data.getData("RequiredProducts").split(",");
@@ -47,6 +49,7 @@ public class ProductSelectionFlow    {
 		basketCount = basketCount+1;
 		productPage.validateCountInBasket(basketCount);
 	}
+	
 	public void validateAddedProductDetails(int i) throws Exception {
 		EShopWebBasketPage basketPage = new EShopWebBasketPage(driver);
 		basketPage.validateNameinCart(RequiredProducts[i]);
@@ -87,11 +90,77 @@ public class ProductSelectionFlow    {
 		basketPage.clickCheckOutButton();
 	}
 
-	public void loginToApplication() throws Exception {
+	public void loginToApplicationFromCheckOut() throws Exception {
 		EShopWebCheckOutPage checkOutPage = new EShopWebCheckOutPage(driver);
 		checkOutPage.inputEmailID(data.getData("loginEmail"));
 		checkOutPage.inputPassword(data.getData("loginPassword"));
 		checkOutPage.clickLoginButton();
+	}
+	
+	public void loginToApplication() throws Exception {
+		EShopWebCheckOutPage checkOutPage = new EShopWebCheckOutPage(driver);
+		checkOutPage.clickLoginIcon();
+		checkOutPage.inputEmailID(data.getData("loginEmail"));
+		checkOutPage.inputPassword(data.getData("loginPassword"));
+		checkOutPage.clickLoginButton();
+	}
+	
+	public void openMyOrders() throws Exception {
+	
+		EShopWebCheckOutPage checkOutPage = new EShopWebCheckOutPage(driver);
+		checkOutPage.hoverOverUserIcon();
+	}
+	
+	public void ValidateOrderCreation() throws Exception {
+		EShopWebCheckOutPage checkOutPage = new EShopWebCheckOutPage(driver);
+
+		int count = checkOutPage.getOrderCount();
+		String[] details =checkOutPage.getOrderDetails(count);
+		String time = checkOutTime;
+		String[] expectedDetails = getExpectedDetails(count, time);
+		checkOutPage.validateOrderDetails(details,expectedDetails);
+	}
+	
+
+	private String getCurrentTime() {
+
+        LocalDateTime myObj = LocalDateTime.now();
+        System.out.println(myObj.toString());
+        String time = myObj.toString();
+        try {
+        time = time.replace(".", "_");
+        String[] dates = time.split("_");
+        	String	date = dates[0];
+        			date= date.replace("T", " ");
+        			date = date.replace("-", "/");
+        			String timePart[]=date.split(" ");
+        			String order[] = timePart[0].split("/");
+        			int month=Integer.parseInt(order[1]);
+        			try {
+        				System.out.println(order[2]);
+        			int day = Integer.parseInt(order[2]);
+        			
+        			
+        			date = month+"/"+day+"/"+order[0]+" "+timePart[3];
+}catch(Exception e) {
+        				
+        			}
+//        String strDate = formatter.format(myObj);
+        return date;
+        }catch(Exception e) {
+        	
+        }
+        return "";
+	}
+
+	private String[] getExpectedDetails(int count, String time) {
+		String[] expectedDetails=new String[4];
+		expectedDetails[0]= count+"";
+		expectedDetails[1]= time+"";
+		expectedDetails[2]= totalCartPrice+"";
+		expectedDetails[3]= "Pending";
+		
+		return expectedDetails;
 	}
 
 	public void validateProductsInReview() throws Exception {
@@ -115,9 +184,16 @@ public class ProductSelectionFlow    {
 
 		basketPage.validateTotalCartPrice(totalCartPrice);
 		reviewPage.clickPayNowButton();
+		setCheckOutTime();
 		reviewPage.validateThankyouMessage();
 
-	}																		
+	}
+	
+	public void setCheckOutTime() {
+		checkOutTime = getCurrentTime();
+	}
+
+																			
 }
 
 

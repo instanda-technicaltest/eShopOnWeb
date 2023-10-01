@@ -1,11 +1,9 @@
 package pages;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.JavascriptExecutor;
 
 import helper.UserInteractions;
 
@@ -28,25 +26,16 @@ public class EShopWebReviewPage extends UserInteractions {
 	}
 
 	
-	public void clickPayNowButton() throws InterruptedException {
-		
-//		Thread.sleep(100);
-		WebElement element = driver.findElement(payNowButtonBy);
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView()", element);
-			js.executeScript("arguments[0].style.border='2px solid red'", element); 
-			js.executeScript("arguments[0].click();", element);
-			}catch(Exception e) {
-				System.out.println(e.getClass());
-			}
+	public void clickPayNowButton() throws InterruptedException, IOException {
+		jsClick(payNowButtonBy,"Pay Now button",10);
 	}
 
-	public void validateThankyouMessage() throws Exception {
-		
+	public void validateThankyouMessage() throws Exception {		
 		String actualHeading = getElement(thankYouLabelBy, "Product Name Label").getText();
 		CompareString(actualHeading, "Thanks for your Order!", "Thankyou label");
 	}
+
+	
 
 	
 		
