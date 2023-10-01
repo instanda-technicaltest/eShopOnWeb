@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class eShop extends Driver {
+public class EShop extends Driver {
 
     Pages locators = new Pages();
     String validEmail = "demouser@microsoft.com";
