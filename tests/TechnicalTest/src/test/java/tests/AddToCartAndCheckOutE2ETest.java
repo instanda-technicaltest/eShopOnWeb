@@ -5,11 +5,6 @@ import flows.ProductSelectionFlow;
 
 public class AddToCartAndCheckOutE2ETest extends BaseConfig  {
 
-//	int basketCount=0;
-//	double totalCartPrice = 0.00;
-	
-
-
 	@Test(priority =1)
 	public void filterAndCompareProductList() throws Exception {
 		ProductSelectionFlow productFlow = new ProductSelectionFlow(driver);
@@ -30,7 +25,6 @@ public class AddToCartAndCheckOutE2ETest extends BaseConfig  {
 			basketFlow.validateUpdatedProductDetails(i);
 		}
 	}
-
 
 	@Test(priority =3)
 	public void checkoutProducts() throws Exception {
