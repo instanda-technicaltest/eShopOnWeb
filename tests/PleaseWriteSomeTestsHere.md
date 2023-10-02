@@ -18,19 +18,19 @@ I have tried to see if the Register and Login funcitonalities are working as exp
 
 Expected Warnings:
 
-	The Email field is not a valid e-mail address.
+The Email field is not a valid e-mail address.
 
-	The Email field is required.
+The Email field is required.
 
-	Username 'demouser@microsoft.com' is already taken.
+Username 'demouser@microsoft.com' is already taken.
 
-	The Password must be at least 6 and at max 100 characters long.
+The Password must be at least 6 and at max 100 characters long.
 
-	Passwords must have at least one non alphanumeric character.
+Passwords must have at least one non alphanumeric character.
 
-	Passwords must have at least one lowercase ('a'-'z').
+Passwords must have at least one lowercase ('a'-'z').
 
-	Passwords must have at least one uppercase ('A'-'Z').
+Passwords must have at least one uppercase ('A'-'Z').
 
 BUGS:
 
