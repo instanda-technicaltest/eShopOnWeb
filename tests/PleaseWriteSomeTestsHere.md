@@ -3,13 +3,15 @@
 INSTANDA TASK NOTES
 
 Programming Language: Java
+Test Type: Functional Test (UI Test) for Register and Login Functionality. 
 
 I used Selenium WebDriver along with Java. For testing, I used TestNG annotations. I have created an EShop class to write my test cases. Also, I used Page Object Model by creating a separate page (Pages.java) for all locators. Normally, we keep locators in the related  page class (Home Page, Login Page etc.), however, I wanted to use only one class for locators for this task.
 
 Used Tools/Libraries: 
-Selenium WebDriver, ChromeDriver,  WebElement, Page Factory, FindBy annotation, Java, Faker Class, TestNG Assert, @BeforeMethod, @AfterMethod, @Test annotations
+Selenium WebDriver, ChromeDriver,  WebElement, Page Factory, FindBy annotation, Java, Faker Class, TestNG Assertion, TestNG @BeforeMethod, @AfterMethod, @Test annotations.
 
-Tested Functionalities: Register (Positive and Negative Scenarios), Login (Positive and Negative Scenarios)
+Tested Functionalities: Register Functionality (Positive and Negative Scenarios), Login (Positive and Negative Scenarios)
+
 I have tried to see if the Register and Login funcitonalities are working as expected and the application is giving expected warnings correctly. I found some issues related to the register functionality as shown below: 
 
 Expected Warnings:
@@ -24,7 +26,7 @@ Expected Warnings:
 BUGS:
 Register Functionality
 
-1-	When I try an invalid email as shown below, the application accepts it and navigates to the account page. This will result to create users without a valid email address. 
+1-	When I try an invalid email as shown below, the application accepts them and navigates to the account page. This will result to create users without a valid email address. 
 
 instanda@gmail
 abc@123
