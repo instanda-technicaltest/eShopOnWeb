@@ -20,6 +20,12 @@ public class EShopWebCheckOutPage extends UserInteractions {
 	private static final By userIconBy = By.xpath("//form[@id='logoutForm']");
 	private static final By myOrdersLinkBy = By.xpath("//a[@class='esh-identity-item']/div[contains(text(),'My orders')]");
 	private static final By orderRowsBy = By.xpath("//article[@class='esh-orders-items row']");
+	private static final By emailFormError = By.xpath("//div[@class='text-danger validation-summary-errors']//*[contains(text(),'Email')]");
+	private static final By passwordFormError = By.xpath("//div[@class='text-danger validation-summary-errors']//*[contains(text(),'Password')]");
+	private static final By invalidLoginFormError = By.xpath("//div[@class='text-danger validation-summary-errors']//*[contains(text(),'Invalid')]");
+	private static final By emailFieldError = By.xpath("//span[@id='Input_Email-error']");
+	private static final By passwordFieldError = By.xpath("//span[@id='Input_Password-error']");
+	private static final By loggedInUserBy = By.xpath("//div[@class='esh-identity-name']");
 	private static final String orderDetails = ("//article[@class='esh-orders-items row'][%s%]/section");
 		
 
@@ -95,6 +101,38 @@ public class EShopWebCheckOutPage extends UserInteractions {
 		
 	}
 
+
+	public void validateEmailErrorFormLabel() throws Exception {
+		String actualText = getElement(emailFormError, "Email form error",10).getText();
+		CompareString(actualText, "The Email field is required.","Email form error");
+	}
+
+	public void validateEmailErrorFieldLabel() throws Exception {
+		String actualText = getElement(emailFieldError, "Email feild error",10).getText();
+		CompareString(actualText, "The Email field is required.","Email feild error");
+	}
+	
+	public void validatePasswordErrorFormLabel() throws Exception {
+		String actualText = getElement(passwordFormError, "Password form error",10).getText();
+		CompareString(actualText, "The Password field is required.","Password form error");
+	}
+
+	public void validatePasswordErrorFieldLabel() throws Exception {
+		String actualText = getElement(passwordFieldError, "Password feild error",10).getText();
+		CompareString(actualText, "The Password field is required.","Email feild error");
+	}
+
+	public void validateInvalidLoginErrorFormLabel() throws Exception {
+		String actualText = getElement(invalidLoginFormError, "Invalid Login form error",10).getText();
+		CompareString(actualText, "Invalid login attempt.","Invalid Login form error");
+	}
+	
+	public void validateLogin(String userName) throws Exception {
+		String actualText = getElement(loggedInUserBy, "Login User Icon",10).getText();
+		CompareString(actualText, userName,"User Logged in");
+		
+	}
+	
 	
 	
 	

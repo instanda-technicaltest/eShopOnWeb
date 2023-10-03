@@ -42,7 +42,6 @@ public class AddToCartAndCheckOutE2ETest extends BaseConfig  {
 	public void validateOrderCreation() throws Exception {
 		ProductSelectionFlow checkOutFlow = new ProductSelectionFlow(driver);
 
-//		checkOutFlow.loginToApplication();
 		checkOutFlow.openMyOrders();
 		checkOutFlow.ValidateOrderCreation();
 	}

@@ -28,6 +28,7 @@ import com.google.common.io.Files;
 public class UserInteractions {
 	protected WebDriver driver;
 	protected WebDriverWait wait;
+	private String snapPath="";
 	
 	public UserInteractions(WebDriver driver) {
 		this.driver = driver;
@@ -215,7 +216,8 @@ public class UserInteractions {
 			
 			JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;  
 			jsExecutor.executeScript("arguments[0].scrollIntoView()", element);
-			jsExecutor.executeScript("arguments[0].style.border='2px solid red'", element);   		
+			jsExecutor.executeScript("arguments[0].style.border='2px solid red'", element);
+			takeSnapShot();
 //			Reporter.report("Pass",elementName +" should be present", elementName +" was present", takeSnapShot());		
 			jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element);  
 			return element;
@@ -387,6 +389,11 @@ public class UserInteractions {
 		
 			Reporter.report(status,expected, actual, takeSnapShot());		
 }
+	public void addReportComparision(String status, String expected, String actual) throws Exception {
+		
+		Reporter.report(status,expected, actual, snapPath);		
+}
+	
 	
 	
 	private int toKeyEvent(String string) {
@@ -427,7 +434,8 @@ public class UserInteractions {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return fileWithPath.replace(Reporter.path, ".");
+		snapPath = fileWithPath.replace(Reporter.path, ".");
+		return snapPath;
 	}
 	
 	public List<WebElement> getElements(By by) throws IOException {
@@ -442,6 +450,15 @@ public class UserInteractions {
 	}
 	
 	public void CompareString(String actual,String expected,String comment) throws Exception {
+		System.out.println(" Validation: "+comment+" Actual: "+actual+" Expected: "+expected);
+		if(actual.equals(expected)) {
+			addReportComparision("Pass",comment+" should be <b>\""+ expected+"</b>\"",comment+" was <b>\""+ actual+"\"</b>");
+		}else {
+			addReportComparision("Fail",comment+" should be <b>\""+ expected+"\"",comment+" was \""+ actual+"\"");
+		}	
+	}
+	
+	public void CompareStringInArray(String actual,String expected,String comment) throws Exception {
 		System.out.println(" Validation: "+comment+" Actual: "+actual+" Expected: "+expected);
 		if(actual.equals(expected)) {
 			ReportComparision("Pass",comment+" should be <b>\""+ expected+"</b>\"",comment+" was <b>\""+ actual+"\"</b>");

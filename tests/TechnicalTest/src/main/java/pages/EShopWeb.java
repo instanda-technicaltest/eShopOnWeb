@@ -95,7 +95,7 @@ public class EShopWeb extends UserInteractions{
 			else
 				expectedList=expectedList+", "+expected[i];		
 		}
-		CompareString(actualList,expectedList.toUpperCase(),"Names of filtered products");
+		CompareStringInArray(actualList,expectedList.toUpperCase(),"Names of filtered products");
 	}
 
 	
@@ -113,7 +113,7 @@ public class EShopWeb extends UserInteractions{
 			js.executeScript("arguments[0].style.border='0px solid red'", element); 
 			
 			String actualprice = element.getText();
-			CompareString(actualprice,prices[i],"Price of filtered product");
+			CompareStringInArray(actualprice,prices[i],"Price of filtered product");
 		}	
 	}
 	
