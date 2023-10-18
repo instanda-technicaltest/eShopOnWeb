@@ -99,9 +99,15 @@ public class Reporter {
 
 			for (int i = 0; i < details.size();i++) {
 				String scrPath = details.get(i).getScreenPath();
+				if(scrPath!=null) {
 				scrPath=scrPath.replace("\\", "\\\\");
 				reportIn = reportIn.replaceFirst(resultPlaceholder,"<tr><td>" + Integer.toString(i+1)  + "</td><td>" + details.get(i).getExpectedResult() + "</td><td><a href=\""+scrPath+"\"  target=\"_blank\">"+ details.get(i).getActualResult() + "</a></td>"+ "</td><td>" + details.get(i).getResult()+"</tr>" + resultPlaceholder);
-			}
+			
+				}else {
+					reportIn = reportIn.replaceFirst(resultPlaceholder,"<tr><td>" + Integer.toString(i+1)  + "</td><td>" + details.get(i).getExpectedResult() + "</td><td>"+ details.get(i).getActualResult() + "</a></td>"+ "</td><td>" + details.get(i).getResult()+"</tr>" + resultPlaceholder);
+					
+				}
+				}
 			
 			reportIn=reportIn.replace("<!-- INSERT_RESULTS -->", "");
 

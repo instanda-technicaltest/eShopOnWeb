@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class Data {
-	static HashMap<String, String> map = new HashMap<String,String>(); 
+	public static HashMap<String, String> map = new HashMap<String,String>(); 
 
 
 	public String getData(String header) {
@@ -48,6 +48,7 @@ public class Data {
 		int rowCount = sheet.getLastRowNum()-sheet.getFirstRowNum();
 		for (int i = 0; i < rowCount+1; i++) {
 			Row row = sheet.getRow(i);
+			System.out.println(row.getCell(0).getStringCellValue());
 			if(row.getCell(0).getStringCellValue().equals(testCaseName)) {
 				Row headRow = sheet.getRow(0);
 				for (int j = 0; j <= row.getLastCellNum()+1; j++) {
@@ -59,6 +60,14 @@ public class Data {
 			}
 		} 
 		book.close();
+	}
+
+	public static  void ClearData() {
+		map.clear();
+	}
+
+	public void setValue(String key, String value) {
+		map.put(key, value);
 	}
 
 }

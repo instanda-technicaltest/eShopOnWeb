@@ -7,10 +7,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.apache.commons.io.FileUtils;
-//import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
@@ -22,6 +20,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.testng.Assert;
 
 import com.google.common.io.Files;
 
@@ -35,7 +34,8 @@ public class UserInteractions {
 		 this.wait = new WebDriverWait(driver, 10);
 	}
 	
-	public void inputKeys(String input, By by, String elementName, int time) throws Exception {
+	public void inputKeys(String input, By by, String elementName, int time)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		try {
 			wait = new WebDriverWait(driver, time);
 		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -49,13 +49,41 @@ public class UserInteractions {
 		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element); 
 		}catch (TimeoutException e){
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" due to "+e.getClass(), takeSnapShot());
+			failTest("<b>"+input +"</b>"+" should be entered in "+ elementName,input +" could not be entered in "+ elementName+" due to "+e.getClass(),takeSnapShot());
 		}catch (Exception e){
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" as "+e.getClass(), takeSnapShot());
+			failTest("<b>"+input +"</b>"+" should be entered in "+ elementName,input +" could not be entered in "+ elementName+" due to "+e.getClass(),takeSnapShot());
 		}	
 		}
-	public void jsInputKeys(String input, By by, String elementName, int time) throws Exception {
+		}
+	
+	private void failTest(String expectedResult, String actualResult,String snap) {
+		// TODO Auto-generated method stub
+		OverallReporter.TCStatus="Fail";
+		OverallReporter.reasonForFailure=actualResult;
+		if(!snap.equals(""))
+		OverallReporter.failureScreen= snap;
+		OverallReporter.failureMap.put(OverallReporter.failureCount+". "+actualResult, snap);
+		OverallReporter.failureCount = OverallReporter.failureCount+1;
+		Reporter.report("Fail","<b>"+expectedResult, actualResult, snap);
+		OverallReporter.failureFlag="Failed";
+//		Assert.fail(actualResult);
+	
+	}
+	
+	public void failTestInReportAndContinue(String expectedResult, String actualResult,String snap) {
+		// TODO Auto-generated method stub
+		OverallReporter.TCStatus="Fail";
+		OverallReporter.reasonForFailure=actualResult;
+		OverallReporter.failureMap.put(OverallReporter.failureCount+". "+actualResult, snap);
+		OverallReporter.failureCount = OverallReporter.failureCount+1;
+		if(!snap.equals(""))
+		OverallReporter.failureScreen= snap;
+		Reporter.report("<font color=\"red\">Fail</font>","<b>"+expectedResult, actualResult, snap);	
+	}
+
+	public void jsInputKeys(String input, By by, String elementName, int time)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		try {
 			wait = new WebDriverWait(driver, time);
 		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -71,29 +99,32 @@ public class UserInteractions {
 		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element); 
 		}catch (TimeoutException e){
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" due to "+e.getClass(), takeSnapShot());
+			failTest("<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" due to "+e.getClass(), takeSnapShot());
 		}catch (Exception e){
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" as "+e.getClass(), takeSnapShot());
+			failTest("<b>"+input +"</b>"+" should be entered in "+ elementName, input +" could not be entered in "+ elementName+" as "+e.getClass(), takeSnapShot());
 		}	
 		}
+		}
 	
-	public void activeInputKeys(String input) throws Exception {
+	public void activeInputKeys(String input)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		try {
 		driver.switchTo().activeElement().sendKeys(input);
 		Reporter.report("Pass","<b>"+input +"</b>"+" should be entered in active element", input +" entered in active element", takeSnapShot());	
 		
 		}catch (TimeoutException e){
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in active element", input +" entered in active element", takeSnapShot());	
+			failTest("<b>"+input +"</b>"+" should be entered in active element", input +" entered in active element", takeSnapShot());	
 			}catch (Exception e){
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+input +"</b>"+" should be entered in active element", input +" entered in active element", takeSnapShot());	
+			failTest("<b>"+input +"</b>"+" should be entered in active element", input +" entered in active element", takeSnapShot());	
 				}
-		
+		}
 	}
 	
 	public void inputKeys(Keys input, By by) {
+		if(OverallReporter.failureFlag!="Failed") {
 		try {
 			wait = new WebDriverWait(driver, 10);
 		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -103,8 +134,10 @@ public class UserInteractions {
 			e.printStackTrace();
 		}	
 		}
+		}
 	
-	public void dragElement(int range, By by, String elementName) throws Exception {
+	public void dragElement(int range, By by, String elementName) {
+		if(OverallReporter.failureFlag!="Failed") {
 		try {
 			wait = new WebDriverWait(driver, 10);
 			WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -122,17 +155,17 @@ public class UserInteractions {
 			Reporter.report("Pass","Range value should be selected as "+ "<b>"+range +"</b>", "Range value selected as "+ range, takeSnapShot());	
 		}catch (TimeoutException e){
 			e.printStackTrace();
-			Reporter.report("Fail","Range value should be selected as "+ "<b>"+range +"</b>", "Range value could not be selected as "+ range, takeSnapShot());
+			failTest("Range value should be selected as "+ "<b>"+range +"</b>", "Range value could not be selected as "+ range, takeSnapShot());
 		}catch (Exception e){
 			e.printStackTrace();
-			Reporter.report("Fail","Range value should be selected as "+ "<b>"+range +"</b>", "Range value could not be selected as "+ range, takeSnapShot());
+			failTest("Range value should be selected as "+ "<b>"+range +"</b>", "Range value could not be selected as "+ range, takeSnapShot());
+		}
 		}
 	}
-		// TODO Auto-generated method stub
 		
 	
-	
-	public void click(By by, String elementName, int time) throws Exception {
+	public void click(By by, String elementName, int time)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, time);
 		try {
 			WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -144,21 +177,25 @@ public class UserInteractions {
 			element.click();	
 			Reporter.report("Pass",elementName +" should be clicked", elementName +" clicked",snap);	
 
-		}catch (TimeoutException e){
+		}catch(TimeoutException e) {
+			System.out.println(e.getClass());
+			failTest(elementName +" should be clicked", elementName +" could not be clicked as element not present with : "+by+" not present", takeSnapShot());	
+			
+		
+			}catch (StaleElementReferenceException e){
 			e.printStackTrace();
-			Reporter.report("Fail",elementName +" should be clicked", elementName +" could not be clicked", takeSnapShot());	
-		}catch (StaleElementReferenceException e){
-			e.printStackTrace();
-			Reporter.report("Fail",elementName +" should be clicked", elementName +" could not be clicked", takeSnapShot());	
+			failTest(elementName +" should be clicked", elementName +" could not be clicked due to "+e.getClass(), takeSnapShot());	
+		}
 		}
 		
 	}
 	
-	public void jsClick(By by, String elementDescription, int i) throws IOException {
-		// TODO Auto-generated method stub
+	public void jsClick(By by, String elementDescription, int i)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, 10);
-		WebElement element =wait.until(ExpectedConditions.elementToBeClickable(by));
+		
 		try {
+			WebElement element =wait.until(ExpectedConditions.elementToBeClickable(by));
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView()", element);
 			js.executeScript("arguments[0].style.border='2px solid red'", element); 
@@ -166,29 +203,39 @@ public class UserInteractions {
 			js.executeScript("arguments[0].click();", element);
 			Reporter.report("Pass",elementDescription +" should be clicked", elementDescription +" clicked",snap);	
 
+		}catch(TimeoutException e) {
+			System.out.println(e.getClass());
+			failTest(elementDescription +" should be clicked", elementDescription +" could not be clicked as element not present with : "+by+" not present", takeSnapShot());	
+			
+		
 			}catch(Exception e) {
 				System.out.println(e.getClass());
-				Reporter.report("Fail",elementDescription +" should be clicked", elementDescription +" could not be clicked", takeSnapShot());	
+				failTest(elementDescription +" should be clicked", elementDescription +" could not be clicked due to "+e.getClass(), takeSnapShot());	
 				
 			}
+		}
 	}
 	
-	public void click(By by, String elementName) throws Exception {
+	public void click(By by, String elementName)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, 10);
 		try {
 		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
 			element.click();	
-	}catch (TimeoutException e){
-		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be clicked", elementName +" could not be clicked", takeSnapShot());	
+	}catch(TimeoutException e) {
+		System.out.println(e.getClass());
+		failTest(elementName +" should be clicked", elementName +" could not be clicked as element not present with : "+by+" not present", takeSnapShot());	
+		
+	
 		}catch (Exception e){
 		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be clicked", elementName +" could not be clicked", takeSnapShot());	
+		failTest(elementName +" should be clicked", elementName +" could not be clicked", takeSnapShot());	
 		}
-		
+		}
 	}
 	
-	public void checkElement(By by, String elementName) throws Exception {
+	public void checkElement(By by, String elementName)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, 10);
 		try {
 			WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -200,16 +247,17 @@ public class UserInteractions {
 			
 	}catch (TimeoutException e){
 		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		failTest(elementName +" should be present", elementName +" was not present", takeSnapShot());	
 		}catch (Exception e){
 		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		failTest(elementName +" should be present", elementName +" was not present", takeSnapShot());	
 		
 		}
-		
+		}
 	}
 	
-	public WebElement getElement(By by, String elementName) throws Exception {
+	public WebElement getElement(By by, String elementName)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, 10);
 		try {
 			WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -224,18 +272,20 @@ public class UserInteractions {
 			
 	}catch (TimeoutException e){
 		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		failTest(elementName +" should be present", elementName +" was not present", takeSnapShot());	
 		}catch (Exception e){
 		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		failTest(elementName +" should be present", elementName +" was not present", takeSnapShot());	
 		
+		}
 		}
 		return null;
 		
 	}
 	
 	
-	public WebElement getElement(By by, String elementName, int time) throws Exception {
+	public WebElement getElement(By by, String elementName, int time)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, time);
 		try {
 			WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -249,17 +299,19 @@ public class UserInteractions {
 			
 	}catch (TimeoutException e){
 		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		failTest(elementName +" should be present", elementName +" was not present", takeSnapShot());	
 		}catch (Exception e){
 		e.printStackTrace();
-		Reporter.report("Fail",elementName +" should be present", elementName +" was not present", takeSnapShot());	
+		failTest(elementName +" should be present", elementName +" was not present", takeSnapShot());	
 		
+		}
 		}
 		return null;
 		
 	}
 
-	public void checkBoxSelection(boolean state, By by, String elementName, int time) throws Exception {
+	public void checkBoxSelection(boolean state, By by, String elementName, int time)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, time);
 		try {
 		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -275,17 +327,18 @@ public class UserInteractions {
 		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element);   
 	}catch (TimeoutException e){
 		e.printStackTrace();
-		Reporter.report("Fail","<b>"+state +"</b>"+" should be selected for "+ elementName, state +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
+		failTest("<b>"+state +"</b>"+" should be selected for "+ elementName, state +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
 		}catch (Exception e){
 		e.printStackTrace();
-		Reporter.report("Fail","<b>"+state +"</b>"+" should be selected for "+ elementName, state +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
+		failTest("<b>"+state +"</b>"+" should be selected for "+ elementName, state +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
 		
 		}
-		
+		}
 	}
 	
 	
-	public void dropDownSelection(String option,String type, By by, String elementName, int time) throws Exception {
+	public void dropDownSelection(String option,String type, By by, String elementName, int time)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, time);
 		try {
 		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -297,28 +350,22 @@ public class UserInteractions {
 		else if(type.equals("text"))
 			objSelect.deselectByVisibleText(option);
 		
-//		switch (type){
-//		case "value":
-//			objSelect.selectByValue(option);
-//		case "text":	
-//			objSelect.deselectByVisibleText(option);
-//		}
-//		
 		Reporter.report("Pass","<b>"+option +"</b>"+" should be selected for "+ elementName, option +" selected for "+ elementName, takeSnapShot());	
 		
 		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element);   
 		}catch (TimeoutException e){
 		e.printStackTrace();
-		Reporter.report("Fail","<b>"+option +"</b>"+" should be selected for "+ elementName, option +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
+		failTest("<b>"+option +"</b>"+" should be selected for "+ elementName, option +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
 		}catch (Exception e){
 		e.printStackTrace();
-		Reporter.report("Fail","<b>"+option +"</b>"+" should be selected for "+ elementName, option +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
+		failTest("<b>"+option +"</b>"+" should be selected for "+ elementName, option +" could not be selected for "+ elementName+" as "+e.getClass(), takeSnapShot());	
 		
 		}
-		
+		}	
 	}
 	
-	public void clickRadio(By by, String elementName, int time) throws Exception {
+	public void clickRadio(By by, String elementName, int time)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		wait = new WebDriverWait(driver, time);
 		try {
 		WebElement element =wait.until(ExpectedConditions.presenceOfElementLocated(by));
@@ -333,16 +380,17 @@ public class UserInteractions {
 		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", element);   
 		}catch (TimeoutException e){
 		e.printStackTrace();
-		Reporter.report("Fail","Radio Button "+elementName+" should be clicked", "Radio Button "+elementName+" Ccould not be clicked as "+e.getClass(), takeSnapShot());	
+		failTest("Radio Button "+elementName+" should be clicked", "Radio Button "+elementName+" Ccould not be clicked as "+e.getClass(), takeSnapShot());	
 		}catch (Exception e){
 		e.printStackTrace();
-		Reporter.report("Fail","Radio Button "+elementName+" should be clicked", "Radio Button "+elementName+" Ccould not be clicked as "+e.getClass(),takeSnapShot());	
-		
+		failTest("Radio Button "+elementName+" should be clicked", "Radio Button "+elementName+" Ccould not be clicked as "+e.getClass(),takeSnapShot());	
+		}
 		}
 		
 	}
 	
 	public void pressKey(int key) {
+		if(OverallReporter.failureFlag!="Failed") {
 		Robot robo;
 		try {
 			robo = new Robot();
@@ -356,10 +404,11 @@ public class UserInteractions {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		}
 	}
 	
-	public void pressNumber(int i) throws Exception {
+	public void pressNumber(int i)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		String numString = Integer.toString(i);
 		String[] numArray = numString.split("");
 		
@@ -377,21 +426,27 @@ public class UserInteractions {
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+i +"</b>"+" should be entered in active Element", i+" could not be entered in Active Element", takeSnapShot());	
+			failTest("<b>"+i +"</b>"+" should be entered in active Element", i+" could not be entered in Active Element", takeSnapShot());	
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Reporter.report("Fail","<b>"+i +"</b>"+" should be entered in active Element", i+" could not be entered in Active Element", takeSnapShot());	
-		}	
+			failTest("<b>"+i +"</b>"+" should be entered in active Element", i+" could not be entered in Active Element", takeSnapShot());	
+		}
+		}
 	}
 	
-	public void ReportComparision(String status, String expected, String actual) throws Exception {
+	public void ReportComparision(String status, String expected, String actual) {
+		if(OverallReporter.failureFlag!="Failed") {
+			Reporter.report(status,expected, actual, takeSnapShot());	
+		}
 		
-			Reporter.report(status,expected, actual, takeSnapShot());		
 }
-	public void addReportComparision(String status, String expected, String actual) throws Exception {
+	public void addReportComparision(String status, String expected, String actual)  {
+		if(OverallReporter.failureFlag!="Failed") {
 		
 		Reporter.report(status,expected, actual, snapPath);		
+		}
+		
 }
 	
 	
@@ -423,11 +478,15 @@ public class UserInteractions {
 	return 0;
 	}
 
-	public String takeSnapShot() throws IOException{
+	public String takeSnapShot() {
 		String fileWithPath=Reporter.screenPath();
 		TakesScreenshot scrShot =(TakesScreenshot)driver;
 		File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+		try {
 		FileUtils.copyFile(SrcFile, new File(fileWithPath));
+		}catch(Exception e) {
+			
+		}
 		File DestFile=new File(fileWithPath);
 		try {
 			Files.copy(SrcFile, DestFile);
@@ -438,32 +497,54 @@ public class UserInteractions {
 		return snapPath;
 	}
 	
-	public List<WebElement> getElements(By by) throws IOException {
+	public List<WebElement> getElements(By by)  {
 		wait = new WebDriverWait(driver, 10);
 		try {
 		List<WebElement> elements =wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;  
+		jsExecutor.executeScript("arguments[0].scrollIntoView()", elements.get(0));
+		jsExecutor.executeScript("arguments[0].style.border='2px solid red'", elements.get(0));   		
+//		Reporter.report("Pass",elements +" should be present", elementName +" was present", takeSnapShot());		
+		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", elements.get(0));  
 		return elements;
 		}catch (TimeoutException e){
-			Reporter.report("Fail","<b> elements with by "+by +"</b>"+" should be present", "<b> elements with by "+by +"</b>"+" was not present", takeSnapShot());			
+			failTest("<b> elements with by "+by +"</b>"+" should be present", "<b> elements with by "+by +"</b>"+" was not present", takeSnapShot());			
 		return null;
 		}		
 	}
 	
-	public void CompareString(String actual,String expected,String comment) throws Exception {
+	public List<WebElement> getElements(By by, int time)  {
+		wait = new WebDriverWait(driver, time);
+		try {
+		List<WebElement> elements =wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;  
+		jsExecutor.executeScript("arguments[0].scrollIntoView()", elements.get(0));
+		jsExecutor.executeScript("arguments[0].style.border='2px solid red'", elements.get(0));   		
+//		Reporter.report("Pass",elements +" should be present", elementName +" was present", takeSnapShot());		
+		jsExecutor.executeScript("arguments[0].style.border='0px solid red'", elements.get(0));  
+		return elements;
+		}catch (TimeoutException e){
+			failTestInReportAndContinue("<b> elements with by "+by +"</b>"+" should be present", "<b> elements with by "+by +"</b>"+" was not present", takeSnapShot());			
+		return null;
+		}		
+	}
+	
+	public void CompareString(String actual,String expected,String comment)  {
 		System.out.println(" Validation: "+comment+" Actual: "+actual+" Expected: "+expected);
 		if(actual.equals(expected)) {
 			addReportComparision("Pass",comment+" should be <b>\""+ expected+"</b>\"",comment+" was <b>\""+ actual+"\"</b>");
 		}else {
-			addReportComparision("Fail",comment+" should be <b>\""+ expected+"\"",comment+" was \""+ actual+"\"");
+			failTestInReportAndContinue(comment+" should be <b>\""+ expected+"</b>\"",comment+" should have been "+expected+" but was <b>\""+ actual+"\"</b>", snapPath);
 		}	
 	}
 	
-	public void CompareStringInArray(String actual,String expected,String comment) throws Exception {
+	public void CompareStringInArray(String actual,String expected,String comment)  {
 		System.out.println(" Validation: "+comment+" Actual: "+actual+" Expected: "+expected);
 		if(actual.equals(expected)) {
 			ReportComparision("Pass",comment+" should be <b>\""+ expected+"</b>\"",comment+" was <b>\""+ actual+"\"</b>");
 		}else {
-			ReportComparision("Fail",comment+" should be <b>\""+ expected+"\"",comment+" was \""+ actual+"\"");
+//			ReportComparision("Fail",comment+" should be <b>\""+ expected+"\"",comment+" was \""+ actual+"\"");
+			failTestInReportAndContinue(comment+" should be <b>\""+ expected+"</b>\"",comment+" should have been "+expected+" but was <b>\""+ actual+"\"</b>", takeSnapShot());
 		}	
 	}
 		

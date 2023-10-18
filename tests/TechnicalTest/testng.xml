@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="End to End Testing">
+  <test name="Test Basics 1">
+      <classes>
+       <class name="tests.AddUpdateAndDeleteItemsAsAdmin"/>
+       <class name="tests.ProductDetailsValidationIntegerationTesting"/>
+       <class name="tests.AddToCartAndCheckOutE2ETest"/>
+      </classes>
+      
+  </test> <!-- Test --> 
+</suite> <!-- Suite -->

@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import helper.UserInteractions;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class EShopWebBasketPage extends UserInteractions {
 
@@ -23,51 +25,57 @@ public class EShopWebBasketPage extends UserInteractions {
 		super(driver);
 	}
 
-	public void validateNameinCart(String product) throws Exception {
+	public void validateNameinCart(String product)  {
 		By by =By.xpath(productNameLabel.replace("%s%",product));
 		String actualNAme = getElement(by, "Product Name Label").getText();
 		CompareString(actualNAme, product, "Product Name label in cart");
 	}
 
-	public void validatePriceinCart(String Product, String price) throws Exception {
+	public void validatePriceinCart(String Product, String price)  {
 		
 		By by =By.xpath(productPriceLabel.replace("%s%",Product));
 		String actualPrice = getElement(by, "Product Price Label").getText().replace("$ ", "");
 		CompareString(actualPrice, price, "Product Price label in cart");				
 	}
 
-	public void validateQuantityinCart(String Product, int quantity) throws Exception {
+	public void validateQuantityinCart(String Product, int quantity)  {
 		
 		By by =By.xpath(productQuantityLabel.replace("%s%",Product));
 		String actualQuantity = getElement(by, "Product Quantity Label").getAttribute("value");
 		CompareString(actualQuantity, quantity+"", "Product Quantity label in cart");
 	}
 
-	public void validateTotalPriceOfProductinCart(String Product, double expectedPrice) throws Exception {
+	public void validateTotalPriceOfProductinCart(String Product, double expectedPrice)  {
+		NumberFormat formatter = new DecimalFormat("#0.00");
+		String expected = (formatter.format(expectedPrice));
+		
 		By by =By.xpath(productTotalPriceLabel.replace("%s%",Product));
-		String actualTotalPrice = getElement(by, "Product Total Price Label").getText();
-		CompareString(actualTotalPrice, expectedPrice+"", "Product Totla Price label in cart");	
+		String actualTotalPrice = getElement(by, "Product Total Price Label").getText().replace("$ ", "");
+		CompareString(actualTotalPrice, expected, "Product Total Price label in cart");	
 	}
 
-	public void validateTotalCartPrice(double totalCartPrice) throws Exception {
-		String actualTotalPrice = getElement(totalCartPriceBy, "Total Cart Price Label").getText();
-		CompareString(actualTotalPrice, totalCartPrice+"", "Product Total Price label in cart");	
+	public void validateTotalCartPrice(double totalCartPrice)  {
+		NumberFormat formatter = new DecimalFormat("#0.00");
+		String expected = (formatter.format(totalCartPrice));
+		
+		String actualTotalPrice = getElement(totalCartPriceBy, "Total Cart Price Label").getText().replace("$ ", "");
+		CompareString(actualTotalPrice, expected, "Product Total Price label in cart");	
 	}
 
-	public void setQuantitiesOfProduct(String product, String quantity, int count) throws Exception {
+	public void setQuantitiesOfProduct(String product, String quantity, int count)  {
 		By by =By.xpath(productQuantityField.replace("%s%",product));
 		jsInputKeys(quantity,by,"Required Quantity of Product",10);
 	}
 
-	public void clickUpdateButton(int count) throws Exception {
+	public void clickUpdateButton(int count)  {
 		jsClick(updateButtonBy,"Update button",10);
 	}
 
-	public void clickOnContinueShoping(int count) throws Exception {
+	public void clickOnContinueShoping(int count)  {
 		jsClick(conitnueShopppingButton,"Continue shopping button",10);
 	
 	}
-	public void clickCheckOutButton() throws InterruptedException, IOException {
+	public void clickCheckOutButton()  {
 		jsClick(checkOutButtonBy,"Checkout button",10);
 	}
 		

@@ -8,7 +8,7 @@ Feature: Product Filter Field and Result validations
     When user fetch testData for <ScenarioName> from "webFeatures"
     And user filters product page
     Then user should Validate count of products displayed in label
-    And user should Validate name of the product displayed
+    And user should Validate name of the product displayed 
     And user should Validate price of the product displayed
     And user should close browser
 

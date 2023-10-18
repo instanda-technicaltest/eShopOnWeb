@@ -1,6 +1,10 @@
 package steps;
 
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import helper.Data;
 import helper.Driver;
 import io.cucumber.java.en.Given;
@@ -11,16 +15,31 @@ import pages.EShopWebCheckOutPage;
 import io.cucumber.java.en.And;
 
 
-public class eShopOnWebStepDefenitions extends Driver {
+public class eShopOnWebStepDefenitions {
 
 	Hooks ano = new Hooks();
 	Driver driverHelp = new Driver();
 	Data data = new Data();
+	WebDriver driver;
 	
 	@Given ("User navigates to site eShopOnWeb")
 	public void navigateToSite() throws Exception {
-		driver = driverHelp.openWebPage("https://localhost:5001/");
-	}
+		String link =("https://localhost:5001/");
+		
+			 try {
+				System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"//src//main//resources//Driver//chromedriver.exe");
+				ChromeOptions handlingSSL = new ChromeOptions();
+				handlingSSL.setAcceptInsecureCerts(true);
+				driver = new ChromeDriver(handlingSSL);
+				driver.manage().window().maximize();
+				driver.manage().deleteAllCookies();
+				driver.get(link);
+				}catch(Exception e) {
+					System.out.println(e.getClass());
+				}
+			
+		 }
+	
 	
 	@And ("user fetch testData for {string} from {string}")
 	public void setUpData(String scenarioName, String sheet) {
