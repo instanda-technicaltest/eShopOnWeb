@@ -1,0 +1,201 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "login",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 221519200,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I open the website",
+            "match": {
+              "location": "Step.iOpenTheWebsite()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 76861401,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I click on login button",
+            "match": {
+              "location": "Step.iClickOnLoginButton()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 205894100,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I enter the email \"admin@microsoft.com\" and password \"Pass@word1\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "admin@microsoft.com",
+                  "offset": 19
+                },
+                {
+                  "val": "Pass@word1",
+                  "offset": 54
+                }
+              ],
+              "location": "Step.iEnterTheEmailAndPassword(String,String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 99460000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I click on Log in button",
+            "match": {
+              "location": "Step.iClickOnLogInButton()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 1568761500,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.inIT()"
+            }
+          }
+        ],
+        "line": 9,
+        "name": "Journey of product to cart",
+        "description": "",
+        "id": "full-operation;journey-of-product-to-cart",
+        "after": [
+          {
+            "result": {
+              "duration": 160359500,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Hooks.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 146010401,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I select T-Shirt from dropdown menu",
+            "match": {
+              "location": "Step.iSelectTShirtFromDropdownMenu()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 106656199,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I add .NET FOUNDATION SWEATSHIRT into cart",
+            "match": {
+              "location": "Step.iAddNETFOUNDATIONSWEATSHIRTIntoCart()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 101204799,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I make quantity as \"1\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "1",
+                  "offset": 20
+                }
+              ],
+              "location": "Step.iMakeQuantityAs(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 10160484000,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "I click on update button and verify the amount",
+            "match": {
+              "location": "Step.iClickOnUpdateButtonAndVerifyTheAmount()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5658944999,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "I click On checkout button",
+            "match": {
+              "location": "Step.iClickOnCheckoutButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5637390500,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "I click on Pay Now Button",
+            "match": {
+              "location": "Step.iClickOnPayNowButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 75806200,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "I verify the Success message",
+            "match": {
+              "location": "Step.iVerifyTheSuccessMessage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "full Operation",
+    "description": "",
+    "id": "full-operation",
+    "keyword": "Feature",
+    "uri": "operations.feature"
+  }
+]
