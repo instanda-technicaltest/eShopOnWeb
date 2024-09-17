@@ -5,5 +5,58 @@ Prerequisites-
 4- JDk 1.8 version or higher version
 
 Project Structure-
-The Automation Suite is created on Page Object Model with TestNG. 
+The Automation Test Suite is created on Page Object Model with TestNG. Page Object Model, also known as POM, is a design pattern in Selenium that creates an object repository for storing all web elements. It helps reduce code duplication and improves test case maintenance.
+In Page Object Model, consider each web page of an application as a class file. Each class file will contain only corresponding web page elements. The Page Object class will have both the page Elements and also the methods/ actions performed on those web elemnts. 
+
+The Page Objects are located in the path -
+/src/main/java/PageObject/BasePages
+The Test cases are located in the path -
+/src/test/java/eshop/TestAutomation/Test
+The functional test case on the Login page , Catalog page and Add to Basket and Checkout is present in the seperate class under /src/test
+GlobalData.properties file is created under path :  tests/QATestSuite/QATestSuite/src/main/java/Resources/GlobalData.properties
+We can add the browser type , Url, Product which to be searched in this file.
+
+We have used TestNG. The testng.xml is stored under tests/QATestSuite/QATestSuite/testng.xml. 
+All the dependencies are stored under pom.xml under rootfolder tests/QATestSuite/QATestSuite.
+
+We can run the testcase for multiple sets of data using DataProvider in TestNG. We can store the data in Json format. 
+The below JSON file is used to store multiple sets of data under path -tests/QATestSuite/QATestSuite/src/main/java/DataFiles/SubmitOrder.json and use it under the desired testcase.
+
+Loging is done with Log4j2 and the logs are stored under path -tests/QATestSuite/QATestSuite/logs
+Reporting is done using ExtentReports and stored under path - tests/QATestSuite/QATestSuite/reports/index.html
+
+Tools Used -
+IDE- IntelliJ Idea, Selenium, Java 1.8, Build tool - Maven
+
+How to run the Test-
+Open the terminal.
+Navigate to the root directory - eShopOnWeb\tests\QATestSuite\QATestSuite>
+run the command : mvn test
+
+We can also run the Maven Goal 'test' from the IDE.
+
+Note - Before Running the Test suite, make sure that we are in the root directory where we have pom.xml - "tests/QATestSuite/QATestSuite"
+Please make sure we have the application running by running the docker commands.
+Note if we are running the test suite in Mac/ Linux env please change the below two path locations befor running the test suite.
+1-Under Package "eshop.TestAutomation.TestComponents" in path -"src/test/java/eshop/TestAutomation/TestComponents/" in class "BaseTest.java" replace ""\\src\\main\\java\\Resources\\GlobalData.properties" with "//src//main//java//Resources//GlobalData.properties".
+2- Under Package "eshop.TestAutomation.Test" in path "src/test/java/eshop/TestAutomation/Test/" in class SubmitOrderTest.java in the Method 'getTestData' change the  "\src\main\java\DataFiles\SubmitOrder.json" with "//src//main//java//DataFiles\SubmitOrder.json"
+
+After successful run we can verify the Reports and Logs.
+
+Challenges -
+We have run the code in Windows and Firefox Browser. The ChromeDriverManager is currently not compatible with chrome version 128 so was not able to run in Chrome.
+The Edge Driver Manager is also having some issues with latest edge browser version.
+
+However we were able to run in Linux with chrome Version 114.
+
+We have added the 2 Functional TCs - Verify Login and Logout for LoginTest
+1 Functional TC- to check if the catalog page listed on hitting the Url and number of catalog items displayed under CatalogPageTest.class
+2 - Functional Tcs to verify the user is able to Add to basket and Add to basket and Check out and place the order under SubmitOrderTest.class
+
+
+
+
+
+
+
   
