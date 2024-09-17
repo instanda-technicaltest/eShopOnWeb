@@ -2,6 +2,8 @@ package eshop.TestAutomation.Test;
 
 import PageObject.BasePages.LogInPage;
 import eshop.TestAutomation.TestComponents.BaseTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class loginTest extends BaseTest {
     LogInPage logInPage;
+    public static Logger log = LogManager.getLogger(loginTest.class.getName());
     @Test
     public void verifyLogin(){
         String password = prop.getProperty("password");
@@ -24,7 +27,7 @@ public class loginTest extends BaseTest {
         WebElement username = catalogPage.getIdentityUsername();
         String usernametext = username.getText();
         Assert.assertEquals(usernametext,"demouser@microsoft.com");
-        System.out.println("login successful");
+        log.info("login successful");
     }
     @Test
     public void verifyLogOut(){
@@ -36,6 +39,6 @@ public class loginTest extends BaseTest {
         System.out.println("logout button is displayed");
         catalogPage.clickLogoutButton();
         Assert.assertTrue(catalogPage.getIdentityUsername().isDisplayed());
-        System.out.println("logout button is Successful");
+        log.info("logout button is Successful");
     }
 }

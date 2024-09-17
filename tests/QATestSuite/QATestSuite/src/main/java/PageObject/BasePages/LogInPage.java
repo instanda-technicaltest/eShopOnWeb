@@ -30,7 +30,7 @@ public class LogInPage extends AbstractPageComponent {
 
 public void enterEmail(String email) {
     Input_Email.sendKeys(email);
-    System.out.println("Email entered");
+    log.info("Email entered");
 }
 
 
@@ -44,11 +44,11 @@ public WebElement getHeaderIcon(){
 
     public void enterPassword(String s) {
     Input_Password.sendKeys(s);
-    System.out.println("Password entered");
+    log.info("Password entered");
     }
 
     public void clickOnLogin() {
     Button_Login.click();
-    System.out.println("Login clicked");
+    log.info("Login clicked");
     }
 }

@@ -3,8 +3,13 @@ package eshop.TestAutomation.TestComponents;
 import PageObject.BasePages.CatalogPage;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eshop.TestAutomation.Test.loginTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,32 +31,34 @@ public class BaseTest {
    public WebDriver driver;
     public Properties prop;
     public CatalogPage catalogPage;
+    public static Logger log = LogManager.getLogger(BaseTest.class.getName());
     public WebDriver initializeDriver() throws IOException {
+
         prop = new Properties();
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\GobalData.properties");
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\GlobalData.properties");
         prop.load(fis);
         String browsername = prop.getProperty("browser");
         switch (browsername) {
                 case "firefox":
-                System.out.println("Initial browser SetUp");
+                log.info("Initial browser SetUp");
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 driver.manage().window().maximize();
-                System.out.println("Initial Browser has been SetUp");
+                log.info("Initial Browser has been SetUp");
                 break;
                 case "chrome":
                     System.out.println("Initial browser SetUp");
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
                     driver.manage().window().maximize();
-                    System.out.println("Initial Browser has been SetUp");
+                    log.info("Initial Browser has been SetUp");
                     break;
                     case "edge":
                 System.out.println("Initial browser SetUp");
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
                 driver.manage().window().maximize();
-                System.out.println("Initial Browser has been SetUp");
+                log.info("Initial Browser has been SetUp");
                 break;
          }
          return driver;
@@ -92,7 +99,17 @@ public class BaseTest {
         catalogPage.goToUrl(url);
         WebElement brandimage = catalogPage.getBrandImage();
         Assert.assertTrue(brandimage.isDisplayed());
-        System.out.println("url is opened");
+        log.info("url is opened");
     }
 
+    public String getScreenShotPath(String testCaseName,WebDriver driver) throws IOException
+    {
+        TakesScreenshot ts=(TakesScreenshot) driver;
+        File source =ts.getScreenshotAs(OutputType.FILE);
+        String destinationFile = System.getProperty("user.dir")+"\\reports\\"+testCaseName+".png";
+        FileUtils.copyFile(source,new File(destinationFile));
+        return destinationFile;
+
+
+    }
 }

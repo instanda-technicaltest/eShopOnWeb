@@ -1,6 +1,8 @@
 package PageFactory;
 
 import PageObject.BasePages.LogInPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +17,7 @@ import java.util.List;
 
 public class AbstractPageComponent {
     WebDriver driver;
-
+    public static Logger log = LogManager.getLogger(AbstractPageComponent.class.getName());
     public AbstractPageComponent(WebDriver driver) {
         this.driver = driver;
     }
@@ -52,7 +54,7 @@ public class AbstractPageComponent {
 
     public void moveToLogoutMenu(){
         moveToElement(this.logoutmenu);
-        System.out.println("Cursor moved to logout menu");
+        log.info("Cursor moved to logout menu");
 
     }
     public WebElement displayLogoutButton(){
@@ -62,7 +64,7 @@ public class AbstractPageComponent {
     public void clickLogoutButton(){
         moveToElement(this.logoutbutton);
         logoutbutton.click();
-        System.out.println("logout button is clicked");
+      log.info("logout button is clicked");
     }
 
 

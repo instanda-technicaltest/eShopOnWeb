@@ -1,4 +1,7 @@
 <suite name="All Test Suite">
+    <listeners>
+        <listener class-name="eshop.TestAutomation.TestComponents.Listeners"/>
+    </listeners>
     <test verbose="2" preserve-order="true" name="CatalogPageTest">
         <classes>
             <class name="eshop.TestAutomation.Test.CatalogPageTest">

@@ -2,6 +2,8 @@ package eshop.TestAutomation.Test;
 
 import PageObject.BasePages.*;
 import eshop.TestAutomation.TestComponents.BaseTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,6 +19,7 @@ public class SubmitOrderTest extends BaseTest {
     UpdatePage updatepg;
     CheckOutPage cp;
     SuccessPage sp;
+    public static Logger log = LogManager.getLogger(SubmitOrderTest.class.getName());
 
     @Test(dataProvider ="getTestData")
     public void verifyAddToBasket(HashMap<String,String> input) throws InterruptedException {
@@ -29,18 +32,18 @@ public class SubmitOrderTest extends BaseTest {
         String title = driver.getTitle();
         String ExpectedTitle = "Basket - Microsoft.eShopOnWeb";
         Assert.assertEquals(title,ExpectedTitle);
-        System.out.println("User Is navigated to Basket Page");
+        log.info("User Is navigated to Basket Page");
         List<String> basketItemsList =basketPage.getItemsinBasket();
-        System.out.println(basketItemsList);
+        log.info(basketItemsList);
         Assert.assertTrue(basketItemsList.contains(ProductName));
-        System.out.println(ProductName+ "is present in the basket");
+        log.info(ProductName+ "is present in the basket");
         basketPage.updateNumberOfItems("0");
         updatepg = basketPage.clickUpdate();
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
         String validation = updatepg.getValidation();
-        System.out.println(validation);
+        log.info(validation);
         Assert.assertTrue(validation.equalsIgnoreCase("Basket is empty."));
-        System.out.println("The items is removed from basket");
+        log.info("The items is removed from basket");
     }
 
     @Test
@@ -56,15 +59,15 @@ public class SubmitOrderTest extends BaseTest {
         String title = driver.getTitle();
         String ExpectedTitle = "Basket - Microsoft.eShopOnWeb";
         Assert.assertEquals(title,ExpectedTitle);
-        System.out.println("User Is navigated to Basket Page");
+        log.info("User Is navigated to Basket Page");
         cp =basketPage.clickCheckout();
         String headervar = cp.getHeaderItemmessage();
         Assert.assertTrue(headervar.equalsIgnoreCase("Review"));
-        System.out.println("User is navigated to checkout page");
+        log.info("User is navigated to checkout page");
         sp =cp.clickPayNow();
         String successMessage = sp.getSuccessMessage();
         Assert.assertTrue(successMessage.equalsIgnoreCase("Thanks for your Order!"));
-        System.out.println("User Is successful in placing the order");
+        log.info("User Is successful in placing the order");
 
     }
 

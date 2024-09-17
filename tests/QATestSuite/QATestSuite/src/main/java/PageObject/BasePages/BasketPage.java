@@ -1,6 +1,8 @@
 package PageObject.BasePages;
 
 import PageFactory.AbstractPageComponent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class BasketPage extends AbstractPageComponent {
     WebDriver driver;
-
+    public static Logger log = LogManager.getLogger(BasketPage.class.getName());
     public BasketPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
@@ -65,7 +67,7 @@ public class BasketPage extends AbstractPageComponent {
         waitForElementtoBeClickable(checkoutButton, 10);
         Thread.sleep(500);
         checkoutButton.click();
-        System.out.println("Checkout button clicked");
+        log.info("Checkout button clicked");
         CheckOutPage cp = new CheckOutPage(driver);
         return cp;
 

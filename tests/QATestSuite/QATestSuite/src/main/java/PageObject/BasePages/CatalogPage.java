@@ -36,7 +36,7 @@ public class CatalogPage extends AbstractPageComponent {
 
  public void clickNextButton(){
     getNextButton().click();
-    System.out.println("Next button clicked");
+    log.info("Next button clicked");
  }
 
  public int getNumberOfItemsdisplayedinCatalog(){
@@ -50,7 +50,7 @@ public class CatalogPage extends AbstractPageComponent {
 
          }
      } catch(ElementClickInterceptedException e) {
-         System.out.println("The total list for catalog items= " +totalitems);
+         log.info("The total list for catalog items= " +totalitems);
      }
      return totalitems;
 
@@ -76,12 +76,12 @@ public BasketPage AddItemToBasket(String ProductName) throws InterruptedExceptio
                 Thread.sleep(500);
                 moveToElement(Add);
                 Add.click();
-                System.out.println("Click on Add to Basket button");
+                log.info("Click on Add to Basket button");
                 flag = false;
             }
         } while (flag);
     }catch(ElementClickInterceptedException e){
-        System.out.println("The product is not present in the catalog");
+        log.warn("The product is not present in the catalog");
     }
     BasketPage bp = new BasketPage(driver);
     return bp;

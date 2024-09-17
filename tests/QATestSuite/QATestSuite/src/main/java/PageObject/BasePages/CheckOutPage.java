@@ -32,7 +32,7 @@ public class CheckOutPage extends AbstractPageComponent {
         waitForElementtoBeClickable(paynow,10);
         Thread.sleep(500);
         paynow.click();
-        System.out.println("Checkout is clicked");
+        log.info("Checkout is clicked");
         SuccessPage sp = new SuccessPage(driver);
         return sp;
     }
