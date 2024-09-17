@@ -1,0 +1,9 @@
+Prerequisites-
+1- Apache Maven should be installed in the system. 
+2- Docker
+3- Any IDE - (IntelliJ Idea / Visual Studio ) withMaven Plugin / TestNG plugins installed in the IDE.
+4- JDk 1.8 version or higher version
+
+Project Structure-
+The Automation Suite is created on Page Object Model with TestNG. 
+  
