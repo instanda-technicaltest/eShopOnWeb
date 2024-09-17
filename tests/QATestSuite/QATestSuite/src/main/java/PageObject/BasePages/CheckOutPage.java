@@ -29,7 +29,6 @@ public class CheckOutPage extends AbstractPageComponent {
     public SuccessPage clickPayNow() throws InterruptedException {
         scrollbyheight();
         waitForElementstoappear(paynow,10);
-        //scrollElemnentToView(checkout);
         waitForElementtoBeClickable(paynow,10);
         Thread.sleep(500);
         paynow.click();

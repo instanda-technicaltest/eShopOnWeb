@@ -1,24 +1,31 @@
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Users/MousumiGhosh/Desktop/EshopTestSuite/eShopOnWeb/tests/QATestSuite/QATestSuite/src/test/java/eshop/TestAutomation/Test/CatalogPageTest.java">
-        <classes/>
-    </test>
-    <test verbose="2" preserve-order="true" name="C:/Users/MousumiGhosh/Desktop/EshopTestSuite/eShopOnWeb/tests/QATestSuite/QATestSuite/src/test/java/eshop/TestAutomation/Test/loginTest.java">
-        <classes/>
-    </test>
-    <test verbose="2" preserve-order="true" name="C:/Users/MousumiGhosh/Desktop/EshopTestSuite/eShopOnWeb/tests/QATestSuite/QATestSuite/src/test/java/eshop/TestAutomation/Test/SampleTest.java">
+    <test verbose="2" preserve-order="true" name="CatalogPageTest">
         <classes>
-            <class name="eshop.TestAutomation.Test.SampleTest">
+            <class name="eshop.TestAutomation.Test.CatalogPageTest">
+                <methods>
+                    <include name="verifyCatalogListDisplayed"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="loginTest">
+        <classes>
+            <class name="eshop.TestAutomation.Test.loginTest">
                 <methods>
                     <include name="verifyLogin"/>
                     <include name="verifyLogOut"/>
-                    <include name="verifyCatalogListDisplayed"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="SubmitOrderTest">
+        <classes>
+            <class name="eshop.TestAutomation.Test.SubmitOrderTest">
+                <methods>
                     <include name="verifyAddToBasket"/>
                     <include name="verifyCheckout"/>
                 </methods>
             </class>
         </classes>
-    </test>
-    <test verbose="2" preserve-order="true" name="C:/Users/MousumiGhosh/Desktop/EshopTestSuite/eShopOnWeb/tests/QATestSuite/QATestSuite/src/test/java/eshop/TestAutomation/Test/SubmitOrderTest.java">
-        <classes/>
     </test>
 </suite>

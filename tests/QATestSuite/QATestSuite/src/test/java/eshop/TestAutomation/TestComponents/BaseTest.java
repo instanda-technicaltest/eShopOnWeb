@@ -1,7 +1,10 @@
 package eshop.TestAutomation.TestComponents;
 
 import PageObject.BasePages.CatalogPage;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,13 +14,17 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class BaseTest {
    public WebDriver driver;
-    Properties prop;
+    public Properties prop;
     public CatalogPage catalogPage;
     public WebDriver initializeDriver() throws IOException {
         prop = new Properties();
@@ -49,6 +56,14 @@ public class BaseTest {
          }
          return driver;
 
+    }
+
+    public List<HashMap<String, String>> getJsonToMap(String FilePath) throws IOException {
+        String JsonContent = FileUtils.readFileToString(new File(FilePath), StandardCharsets.UTF_8);
+        ObjectMapper mapper = new ObjectMapper();
+        List<HashMap<String,String>> data =mapper.readValue(JsonContent, new TypeReference<List<HashMap<String ,String>>>() {
+        });
+        return data;
     }
 
    /* public CatalogPage launchUrl(){

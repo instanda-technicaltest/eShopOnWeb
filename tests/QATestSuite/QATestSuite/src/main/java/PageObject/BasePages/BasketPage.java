@@ -39,13 +39,11 @@ public class BasketPage extends AbstractPageComponent {
 
     public List<String> getItemsinBasket() {
         List<WebElement> basketItems = waitForListElementstoAppear(Itemname, 10);
-        //Thread.sleep(500);
         List<String> basketitems = basketItems.stream().map(s -> s.getText()).collect(Collectors.toList());
         return basketitems;
     }
 
     public void updateNumberOfItems(String number) {
-        //moveToElement(basketItemNumber);
         scrollElemnentToView(basketItemNumber);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",

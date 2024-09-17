@@ -16,12 +16,6 @@ public class CatalogPage extends AbstractPageComponent {
         PageFactory.initElements(driver, this);
     }
 
-
-
-
-    //@FindBy(xpath = "//a[@href = '/Identity/Account/Login']")
-
-
     @FindBy(id = "Next")
     WebElement nextButton;
 

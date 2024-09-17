@@ -4,15 +4,12 @@ import PageObject.BasePages.*;
 import eshop.TestAutomation.TestComponents.BaseTest;
 import org.openqa.selenium.*;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class SampleTest extends BaseTest {
+public class Sample extends BaseTest {
 
     //WebDriver driver;
     //CatalogPage catalogPage;
