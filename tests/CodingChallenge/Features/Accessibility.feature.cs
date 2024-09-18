@@ -107,7 +107,7 @@ namespace CodingChallenge.Features
       testRunner.And("I scan the page for accessibility violations", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 7
-      testRunner.Then("I expect there to be no volation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+      testRunner.Then("I expect there to be no violations", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

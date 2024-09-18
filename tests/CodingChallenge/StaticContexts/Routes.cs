@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CodingChallenge.Utils
+﻿namespace CodingChallenge.StaticContexts
 {
-    public class Routes
+    public static class Routes
     {
         public static class PageRoutes
         {

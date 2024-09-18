@@ -112,7 +112,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 5
- testRunner.Given(string.Format("I make a valid login request to the API \"{0}\" \"{1}\"", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("I make a valid login request to the Api \"{0}\" \"{1}\"", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
  testRunner.Then("the request should be successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -160,7 +160,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 15
- testRunner.Given(string.Format("I make a invalid login request to the API \"{0}\" \"{1}\"", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("I make a invalid login request to the Api \"{0}\" \"{1}\"", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 16
  testRunner.Then("the request should be not successful", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
