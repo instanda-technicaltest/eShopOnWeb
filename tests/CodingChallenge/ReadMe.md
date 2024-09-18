@@ -55,13 +55,20 @@ You can then build and run the solution via the test explorer on visual Studio o
 dotnet build
 dotnet test
 ```
-
+### Other Commands
+Generate the LivingDoc and test results report after running your tests using the below commands:
+```
+dotnet test --logger:html
+specflow-plus-livingdoc
+livingdoc feature-folder . --output TestExecution.html
+```
 # Types of Tests 
 UI tests
 
 - Valid and Invalid Login scenarios
 - E2E of a user selecting items to add in the basket and successfully checking out after a login
 - Authenticated checkout: User is PRE-authenticated (leveraging playwright reusable state feature) and successfully checkout
+- Accessibility test: Test homepage has no serious accessibility rules violation
 
 API test
 
