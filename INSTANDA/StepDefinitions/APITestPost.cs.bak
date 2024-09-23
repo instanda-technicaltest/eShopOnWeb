@@ -23,7 +23,8 @@ namespace INSTANDA.StepDefinitions
         [Given(@"I have the POST API endpoint ""([^""]*)""")]
         public void GivenIHaveThePOSTAPIEndpoint(string endpoint)
         {
-            _apiEndpoint = $"{ReadConfig.ApiUrl}{endpoint}";            
+            //_apiEndpoint = $"{SetConfig.ApiUrl}{endpoint}";
+            _apiEndpoint = endpoint;
         }
 
 
@@ -69,11 +70,11 @@ namespace INSTANDA.StepDefinitions
             Assert.AreEqual(statusCode, (int)_response.StatusCode);
         }
 
-        [Then(@"the POST response should contain ""(.*)""")]
-        public async Task ThenTheResponseShouldContain(string expectedField)
-        {
-            var content = await _response.Content.ReadAsStringAsync();
-            Assert.IsTrue(content.Contains(expectedField));
-        }
+        //[Then(@"the response should contain ""(.*)""")]
+        //public async Task ThenTheResponseShouldContain(string expectedField)
+        //{
+        //    var content = await _response.Content.ReadAsStringAsync();
+        //    Assert.IsTrue(content.Contains(expectedField));
+        //}
     }
 }

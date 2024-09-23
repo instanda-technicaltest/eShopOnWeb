@@ -9,7 +9,7 @@ Scenario: Validate PUT API to update catalog items
       | name                       | description               | price | pictureUri             | catalogTypeId | catalogBrandId |
       | ".NET Bot Black Hoodie"     | ".NET Bot Black Hoodie"   | 20.0  | /images/products/1.png | 2             | 2              |
 	When I send a PUT request to the API with this data
-	Then the PUT response status code should be 200
-    And the PUT response should contain "success"
+	Then the response status code should be 200
+    And the response should contain "success"
 
 
