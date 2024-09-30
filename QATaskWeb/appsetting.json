@@ -1,0 +1,4 @@
+{
+  "BrowserType": "chrome", //Input the browser type for execution, currently supported browsers are chrome, firefox, ie and edge
+  "Url": "http://localhost:5106/"
+}
