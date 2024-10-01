@@ -1,0 +1,38 @@
+2024-10-01 12:55:17 INFO  DriverManager:28 - Launching Chrome Browser
+2024-10-01 12:55:20 INFO  HomePage:135 - Clicking on Login Link : [[ChromeDriver: chrome on mac (cec50ab7069130ea1b77d7ab48fcc933)] -> xpath: //a[@class='esh-identity-name esh-identity-name--upper']]
+2024-10-01 12:55:20 INFO  LoginPage:57 - Enter email id admin@microsoft.com in the email field
+2024-10-01 12:55:20 INFO  LoginPage:61 - Enter password Pass@word1 in the password field
+2024-10-01 12:55:20 INFO  LoginPage:77 - Click on login button
+2024-10-01 12:55:20 INFO  HomePage:176 - Hovering on drop down menu
+2024-10-01 12:55:20 INFO  HomePage:188 - Clicking on menu item : Admin
+2024-10-01 12:55:20 INFO  HomePage:152 - verifying user is on Admin page
+2024-10-01 12:55:20 INFO  HomePage:156 - User is on Admin page
+2024-10-01 12:55:20 INFO  AdminPage:20 - Click on logout button
+2024-10-01 12:55:21 INFO  HomePage:152 - verifying user is on Login page
+2024-10-01 12:55:21 INFO  HomePage:156 - User is on Login page
+2024-10-01 12:55:21 INFO  HomePage:165 - Verify user is logged in successfully
+2024-10-01 12:55:21 INFO  HomePage:167 - User is logged in successfullyadmin@microsoft.com
+2024-10-01 12:55:21 INFO  DriverManager:44 - Closing Browser
+2024-10-01 12:56:33 INFO  DriverManager:28 - Launching Chrome Browser
+2024-10-01 12:56:34 INFO  HomePage:55 - Verify logo is displayed true
+2024-10-01 12:56:34 INFO  HomePage:69 - Number of products displayed in the Text on HomePage: 10
+2024-10-01 12:56:34 INFO  HomePage:101 - Atleast one product is displayed and it matches the quantity displayed in text.
+2024-10-01 12:56:35 INFO  HomePage:69 - Number of products displayed in the Text on HomePage: 10
+2024-10-01 12:56:35 INFO  HomePage:122 - Product Image, Product Name, Product Prices, Add to cart button are displayed .
+2024-10-01 12:56:35 INFO  HomePage:131 - Login Link is displayed : [[ChromeDriver: chrome on mac (fed6a97359cd4b87bd19ee7e2a0220ba)] -> xpath: //a[@class='esh-identity-name esh-identity-name--upper']]
+2024-10-01 12:56:35 INFO  DriverManager:44 - Closing Browser
+2024-10-01 12:56:35 INFO  DriverManager:28 - Launching Chrome Browser
+2024-10-01 12:56:36 INFO  HomePage:69 - Number of products displayed in the Text on HomePage: 10
+2024-10-01 12:56:36 INFO  HomePage:101 - Atleast one product is displayed and it matches the quantity displayed in text.
+2024-10-01 12:56:36 INFO  HomePage:140 - Getting first product name : .NET BOT BLACK SWEATSHIRT
+2024-10-01 12:56:36 INFO  HomePage:140 - Getting first product name : .NET BOT BLACK SWEATSHIRT
+2024-10-01 12:56:36 INFO  HomePage:147 - Clicking on Add to Cart button for first product : .NET BOT BLACK SWEATSHIRT
+2024-10-01 12:56:37 INFO  HomePage:152 - verifying user is on Basket page
+2024-10-01 12:56:37 INFO  HomePage:156 - User is on Basket page
+2024-10-01 12:56:37 INFO  BasketPage:58 - Get Basket Quantity from the Basket Page 1
+2024-10-01 12:56:37 INFO  BasketPage:42 - Get Product Names from the Basket Page [.NET Bot Black Sweatshirt]
+2024-10-01 12:56:37 INFO  BasketPage:48 - Get Product Prices from the Basket Page [$ 19.50]
+2024-10-01 12:56:37 INFO  BasketPage:58 - Get Basket Quantity from the Basket Page 1
+2024-10-01 12:56:37 INFO  BasketPage:63 - Get Total from the Basket Page 19.5
+2024-10-01 12:56:37 INFO  BasketPage:48 - Get Product Prices from the Basket Page [$ 19.50]
+2024-10-01 12:56:37 INFO  DriverManager:44 - Closing Browser
