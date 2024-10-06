@@ -13,6 +13,7 @@ getEnv();
 // Declare 'page' and 'browser' variables globally for use across test scenarios
 let page: Page;
 let browser: Browser;
+let authToken: string;
 setDefaultTimeout(5000000);
 
 
@@ -30,6 +31,18 @@ BeforeAll(async () => {
     // Check if the test is for API Testing (based on ENV variable)
     if (process.env.ENV === 'APITesting') {
         console.log("API Testing Framework");
+        // Make the request to authenticate and get the token
+        const response = await axios.post(process.env.API_BASE_URL + '/authenticate', {
+            username: process.env.USERNAME,
+            password: process.env.PASSWORD
+        });
+
+        if (response.status === 200) {
+            authToken = response.data.token; // Store token for use in other requests
+            console.log('Authentication successful, token stored');
+        } else {
+            throw new Error('Failed to authenticate');
+        }
     }
     else {
         try {
@@ -85,4 +98,4 @@ After(async function (scenario: ITestCaseHookParameter) {
     this.attach(logFileContent, 'text/plain');
 });
 
-export { page, browser, axios };
+export { page, browser, axios, authToken };

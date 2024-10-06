@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import Assert from '../step-definitions/Assertions/assert';
+import Assert from '../step-definitions/Assertions/ui-assertions';
 
 // Userlogout class handles the logout functionality and verification
 export class Userlogout {

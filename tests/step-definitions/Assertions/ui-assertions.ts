@@ -17,6 +17,19 @@ export default class Assert {
         await expect(this.page).toHaveURL(url);
     }
 
+    // Method to assert the current URL is either baseUrl or another URL
+    async assertEitherURL(expectedUrl1: string, expectedUrl2?: string) {
+        const actualUrl = await this.page.url(); // Get the current URL
+
+        // If both URLs are provided, assert the actual URL matches one of them
+        if (expectedUrl2===actualUrl) {
+            expect(actualUrl === expectedUrl1 || actualUrl === expectedUrl2).toBe(true);
+        } else {
+            // Assert it matches the base URL only
+            expect(actualUrl).toBe(expectedUrl1+"/");
+        }
+    }
+
     async assertURLContains(title: string) {
         const pageURL = this.page.url();
         expect(pageURL).toContain(title);

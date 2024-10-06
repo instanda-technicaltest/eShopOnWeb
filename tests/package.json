@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "uitests": "cross-env ENV=DEV cucumber-js features/**/*.feature --tags \"@UIRegression\" --require-module ts-node/register --require step-definitions/**/**/*.ts -f html:test-results/cucumber_report.html"
+    "uitests": "cross-env ENV=DEV cucumber-js features/**/*.feature --tags \"@UIRegression\" --require-module ts-node/register --require step-definitions/**/**/*.ts -f html:test-results/cucumber_report.html",
+    "apitests": "cross-env ENV=APITesting cucumber-js features/**/*.feature --tags \"@APIRegression\" --require-module ts-node/register --require step-definitions/**/**/*.ts -f html:test-results/cucumber_report.html"
   },
   "keywords": [],
   "author": "",

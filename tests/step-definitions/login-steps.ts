@@ -21,3 +21,16 @@ Then('the user should be redirected to home page', async () => {
     await userlogin.verifySuccessfulLogin(process.env.EMAIL!);
     commonContext.logger.info("Login Successfully");
 });
+
+When('the user logs in with invalid credentials', async () => {
+    const userlogin = new Userlogin(page);
+    await userlogin.invalidLoginDetails(process.env.EMAIL!+"invalid", process.env.PASSWORD!+"invalid");
+    commonContext.logger.info("InValid credentials cannot login");
+});
+
+Then('the user should see invalid login message', async () => {
+    const userlogin = new Userlogin(page);
+    await userlogin.verifyUnSuccessfulLogin();
+    commonContext.logger.info("Invalid Login");
+});
+
