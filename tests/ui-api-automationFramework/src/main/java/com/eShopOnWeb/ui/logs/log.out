@@ -1,0 +1,26 @@
+2024-10-06 17:10:421 INFO  ManageBrowser :32 - Chrome Browser Launch.......
+2024-10-06 17:10:84 INFO  CatalogPage :25 - Click on login link [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> css selector: .esh-identity-name.esh-identity-name--upper]
+2024-10-06 17:10:266 INFO  LoginPage :31 - Entering email demouser@microsoft.com to email field : [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> id: Input_Email]
+2024-10-06 17:10:389 INFO  LoginPage :36 - Entering password Pass@word1 to password field : [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> id: Input_Password]
+2024-10-06 17:10:862 INFO  LoginPage :41 - Click on login button Proxy element for: DefaultElementLocator 'By.cssSelector: button[type='submit']'
+2024-10-06 17:10:246 INFO  CatalogPage :30 - Clicking on add to basket button : Proxy element for: DefaultElementLocator 'By.xpath: //span[text()='Roslyn Red Sheet']/ancestor::form//input[@type='submit']'
+2024-10-06 17:10:272 INFO  BasketPage :32 - Getting product text: [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> css selector: .esh-basket-item.col-xs-3]
+2024-10-06 17:10:401 INFO  BasketPage :39 - Enter Quantity [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> css selector: .esh-basket-input][[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> css selector: .esh-basket-input]
+2024-10-06 17:10:642 INFO  BasketPage :44 - Click on update button [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> name: updatebutton]
+2024-10-06 17:10:662 INFO  BasketPage :48 - Getting total price: [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> css selector:  .esh-basket-item--mark.col-xs-2:nth-child(2)]
+2024-10-06 17:10:877 INFO  BasketPage :54 - Click on checkout button Proxy element for: DefaultElementLocator 'By.cssSelector: a[class='btn esh-basket-checkout']'
+2024-10-06 17:10:881 INFO  CheckoutPage :26 - Getting page title: 
+2024-10-06 17:10:413 INFO  CheckoutPage :22 - Click on PayNow button Proxy element for: DefaultElementLocator 'By.cssSelector: input[value='[ Pay Now ]']'
+2024-10-06 17:10:429 INFO  CheckoutCompletePage :19 - Getting Header text: [[ChromeDriver: chrome on windows (c700fe6a8fe6fd816b38e751f6a5b3b1)] -> xpath: //h1]
+2024-10-06 17:10:18 INFO  ManageBrowser :32 - Chrome Browser Launch.......
+2024-10-06 17:10:462 INFO  CatalogPage :25 - Click on login link [[ChromeDriver: chrome on windows (0e0c204808756578539b705d0ebe0ef0)] -> css selector: .esh-identity-name.esh-identity-name--upper]
+2024-10-06 17:10:587 INFO  LoginPage :31 - Entering email demouser@microsoft.com to email field : [[ChromeDriver: chrome on windows (0e0c204808756578539b705d0ebe0ef0)] -> id: Input_Email]
+2024-10-06 17:10:662 INFO  LoginPage :36 - Entering password Pass@word1 to password field : [[ChromeDriver: chrome on windows (0e0c204808756578539b705d0ebe0ef0)] -> id: Input_Password]
+2024-10-06 17:10:800 INFO  LoginPage :41 - Click on login button Proxy element for: DefaultElementLocator 'By.cssSelector: button[type='submit']'
+2024-10-06 17:10:814 INFO  CatalogPage :34 - Getting email text: [[ChromeDriver: chrome on windows (0e0c204808756578539b705d0ebe0ef0)] -> css selector: div.esh-identity-name]
+2024-10-06 17:10:184 INFO  ManageBrowser :32 - Chrome Browser Launch.......
+2024-10-06 17:10:541 INFO  CatalogPage :25 - Click on login link [[ChromeDriver: chrome on windows (dfa1fc1da09f7112963f31915f7325ef)] -> css selector: .esh-identity-name.esh-identity-name--upper]
+2024-10-06 17:10:636 INFO  LoginPage :31 - Entering email test@microsoft.com to email field : [[ChromeDriver: chrome on windows (dfa1fc1da09f7112963f31915f7325ef)] -> id: Input_Email]
+2024-10-06 17:10:708 INFO  LoginPage :36 - Entering password Pass@test to password field : [[ChromeDriver: chrome on windows (dfa1fc1da09f7112963f31915f7325ef)] -> id: Input_Password]
+2024-10-06 17:10:811 INFO  LoginPage :41 - Click on login button [[ChromeDriver: chrome on windows (dfa1fc1da09f7112963f31915f7325ef)] -> css selector: button[type='submit']]
+2024-10-06 17:10:824 INFO  LoginPage :45 - Getting error message: [[ChromeDriver: chrome on windows (dfa1fc1da09f7112963f31915f7325ef)] -> css selector: div[class='text-danger validation-summary-errors'] ul li]
