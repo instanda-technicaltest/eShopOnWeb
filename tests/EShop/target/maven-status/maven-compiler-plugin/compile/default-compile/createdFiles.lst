@@ -1,0 +1,11 @@
+org/example/ui/BasketPage.class
+org/example/ui/CataloguePage.class
+org/example/api/payload/CatalogItem.class
+org/example/ui/CheckoutPage.class
+org/example/api/ApiTest.class
+org/example/api/payload/CatalogType.class
+org/example/api/ApiUtils.class
+org/example/ui/LoginPage.class
+org/example/api/payload/AuthenticationPayload.class
+org/example/api/payload/CreateCatalogItemPayload.class
+org/example/api/Main.class

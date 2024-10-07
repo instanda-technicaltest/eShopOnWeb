@@ -1,0 +1,9 @@
+org/example/apitests/CatalogBrandApiTest.class
+org/example/apitests/CatalogTypeApiTest.class
+uitests/LoginTest.class
+org/example/apitests/AuthenticationApiTest.class
+org/example/apitests/CatalogItemApiTest.class
+uitests/WebDriverFactory.class
+uitests/FunctionalTests.class
+uitests/CataloguePageTest.class
+org/example/apitests/CreateCatalogItemApiTest.class
