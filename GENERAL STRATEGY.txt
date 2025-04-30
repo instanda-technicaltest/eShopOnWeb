@@ -1,0 +1,61 @@
+The coding tasks says:
+- Automated tests
+- Fast feedback
+- Continues to provide value to our customers
+- High level requirements
+
+For "automated" and "fast feedback" I'm thinking:
+- Shift left/Testing triangle
+- Unit tests
+  - They're fast
+  - They're super easy to run in the pipeline on each check-in
+  - It's easy to get the code coverage using NuGet package Coverlet
+
+For "continues to provide value to our customers" I'm thinking:
+- This sounds like regression tests
+  - Therefore a mix of unit tests, Api/integration tests, and a couple of UI test for good measure
+
+For "high level requirements" I'm thinking:
+- This really could be any of unit tests, api tests, inegration tests and good old fashioned UI tests
+  - UI tests absolutely would cover basic high level functionallity, where unit tests might miss places here and there
+    especially when I'm writing them from scratch retrospectively, it feels like I might miss whole feature areas
+  - Api tests seem like a good way to cover a lot of the high level requirements in a comprehensive way
+
+
+Summary:
+- I feel like there's scope to add:
+  - Unit tests
+    - Against everything
+    - Fast and easy to run
+      - XUnit or NUnit or MSTest?
+        Well, it's much of a muchness, except NUnit stands out as sharing the same test class instance between its 
+        test methods (by default). XUnit feels good, which is my choice, but I'm also fine working with NUnit and MSTest
+  - Api tests
+    - Against the PublicApi project
+    - Postman, other Api players, and also HTTP calls inside unit test functions can each achieve this
+      - These can all be run in the pipeline, with a hosted test server
+      - Capturing test code coverage for api/integration tests which has a separate host process can be hard, but not 
+        impossible. The host application can be instrumented with a tool called dotnet-coverage, then cobertura coverage 
+        files produced for its running session. These are slightly incompatable with the cobertura coverage files produced
+        by Coverlet, so in this configuration previously I have run the dotnet test command under dotnet-coverage too,
+        then the two sets of coverage files, from the unit test project and the host project, are both compatable to 
+        be merged by report-generator because they've both been produced by dotnet-coverage.
+      - I kind of favour creating Api tests in C# this time, using a HTTP client, although I am absolutely fine with 
+        using Postman or other similar http sequencers. Postman has a pipeline runner and is a popular choice. Using C# 
+        for Api tests keeps all the tests in the Visual Studio solution, in one place, which feels like a bonus.
+  - Intregration tests
+    - Against BlazorAdmin project
+  - UI tests
+    - Against the BlazorAdmin project
+    - Against the Web project
+    - Playwright has good .Net support, and that is jumping out.
+      - Playwright favours the Page Object Model, which I've used before, and it's very nice
+      - Although it's possible to use the Page Object Model with Specflow/Reqnroll and raw Selenium, Playwright feels like a 
+        good evolution from raw Selenium calls, or writing your own wrapper. It has great support and popularity in the 
+        industry
+    - Cypress.io jumps out too, but my own skillset favours jumping in with Playwright although Cypress.io is on my list to 
+      play with and get more familiar
+    - UI tests are slow to run and notoriously flakey
+- The testing triangle says we want:
+  - More unit tests than integration tests
+  - And less UI tests than any of the others

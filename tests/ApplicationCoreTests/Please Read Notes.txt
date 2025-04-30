@@ -1,0 +1,15 @@
+﻿Application Core Unit Tests:
+
+First thoughts:
+- There are a whole bunch of interfaces defined which is reassuring
+- This assembly contains three services. That's my clue as to what might need to be unit tested
+    - OrderService
+    - UriComposer
+    - BasketService
+- I've included only 'happy path' tests for most of BasketService
+- There should also be a 'happy path' test for TransferBasketAsync which I have not written yet
+- 'unhappy path' tests could unclude:
+    - SetQuantities with null quantities
+    - SetQuantities with null basket
+    - DeleteBasketAsync with an invalid basket id
+    - TransferBasketAsync where one or both of the basket ids are null

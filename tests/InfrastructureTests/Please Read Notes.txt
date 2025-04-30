@@ -1,0 +1,13 @@
+﻿Infrastructure Unit Tests:
+
+First thoughts:
+- This assembly contains two services.
+    - BasketQueryService
+    - EmailSender
+- There could possibly be a test against EmailSender, which would fail until it's written?
+- Using a memory DB for tests has some disadvantages, because there are differences between the in-memory database 
+  and a real SQL database
+  - However, the test database fixture, that firstly uses an in-memory database, feels like a resonable start
+  - Linq to Objects with in memory databases are more robust so I would probably try move away from them, and favour 
+    a real database with Linq to SQL for tests, then more errors can be provoked
+  - Transactions are different between in-memory and SQL databases
