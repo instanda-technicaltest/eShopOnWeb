@@ -7,7 +7,7 @@ using Moq;
 
 namespace ApplicationCoreTests;
 
-public class BasketServiceUnitTests
+public class BasketService_UnitTests
 {
     private CancellationToken ItIsAny_CT = It.IsAny<CancellationToken>();
 
@@ -108,7 +108,7 @@ public class BasketServiceUnitTests
 
         quantity.Should().BeGreaterThan(0, "Test malfunction, expecting quantity to be greater than zero.");
         int expectedQuantity = quantity*2;
-        var quantitiesToUpdate = new Dictionary<string, int> { { changeQuantityBasket.Items.First().Id.ToString(), newQuantity } };
+        var quantitiesToUpdate = new Dictionary<string, int> { { changeQuantityBasket.Items.First().Id.ToString(), expectedQuantity } };
 
         // Act
         var actual = await basketService.SetQuantities(changeQuantityBasket.Id, quantitiesToUpdate);

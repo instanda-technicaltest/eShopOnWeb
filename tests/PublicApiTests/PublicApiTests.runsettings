@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<RunSettings>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <HostTestBaseUrl>https://localhost:5099/api/</HostTestBaseUrl>
+      <HostTestUsername>demouser@microsoft.com</HostTestUsername>
+      <HostTestPassword>Pass@word1</HostTestPassword>
+      <HostTestAdminUsername>admin@microsoft.com</HostTestAdminUsername>
+      <HostTestAdminPassword>Pass@word1</HostTestAdminPassword>
+    </EnvironmentVariables>
+  </RunConfiguration>      
+</RunSettings>

@@ -1,0 +1,23 @@
+﻿PublicApi tests:
+
+First thoughts:
+- 8 x endpoints to api test
+- Work with the seeded data as the Api test data?
+  - This could work: that the seeded data becomes the test data for test runs
+    So I could work with the assumption that the host PublicApi server under test is running with this data for tests 
+    in a test environment.
+
+Tests needed but not yet written:
+- Validate invalid query parameters for all endpoints that take query parameters
+- Validate against invalid request body for Post and Put endpoints
+- All CatalogBrandEndpoint tests
+- All CatalogTypeEndpoint tests
+- CatalogItemEndpoint:
+  - Paging tests for /api/catalog-items
+  - Post/insert test for /api/catalog-items
+  - Put/update test for /api/catalog-items
+
+- There is possible scope for Unit Tests within this project:
+  - CustomSchemaFilter
+  - ImageValidators
+

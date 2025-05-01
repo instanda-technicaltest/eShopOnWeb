@@ -1,0 +1,99 @@
+Tuesday 29th April 2025
+10:00 (setup)
+  |	- Cloned repo
+  v	- Scanned git readme
+	- Scanned wiki from git readme
+  ^	- Scanned the source code
+  |	- Built the project
+11:00 (1 hour)
+
+12:00 (looking through the project thining about tests)
+  |	- Looked through the VS project, made notes:
+  V     - ApplicationCore
+ 	  - The project needs unit test
+	  - There are some services
+	- BlazorAdmin
+	  - Seems like a good candidate for integration tests to the PublicApi
+	  - UI elements
+	- BlazorShared
+	  - Mostly POC with attribute validation dressing
+	- Infrastructure
+	  - BasketQueryService possible candidate for unit/integration tests
+        - PublicApi
+	  - Lots of endpoints for Api testing
+	  - Some bits and bobs for possible unit testing
+	- Web
+	  - Reliance on raw UserManager<> might cause mocking issues?
+	  - Some Extension classes could be unit tested?
+	  - Use of MediatR gives me a bit of a learning curve
+	    - Must be careful to test our programmed behaviour and not to accidentally test the MediatR library
+	    - Thought this article could help me: https://goatreview.com/mediatr-quickly-test-handlers-with-unit-tests
+	  - There is an Api Health check endpoint
+	  - Some services to mock
+  ^	  - Lots of attribute validation on the view model classes
+  |	  - Prime candidate for a UI test or two but still scope for unit tests
+13:10 (1 hour)
+
+14:20 (pondering about Api tests)
+  |	- Gave some thought to Api tooling
+  |	  - Postman, or another HTTP sequencer? They are all very good
+  |	  - or C# HTTP requests in classic 'unit test' functions?
+  |	  - Leaning towards C# tests, so I can have all the tests inside the VS solution
+14:25 (5 minutes)
+
+19:45 (recapping the high level goals)
+  |	- Re-read the coding challenge specification
+  V	  - Automation tests
+	  - to provide *fast feedback*
+	  - that it *continues to* provide value
+	  - so that the app functions 
+	  - across its *high level functions*
+	- Thoughts:
+	  - Fastest are unit tests
+	  - Api tests jump out
+	  - UI tests jump out, these are the least fast, but do cover high level functionality
+	  - Can use *Open Source* libraries
+  ^	    - FluentAssertions is not open source with the latest version (v8), but old versions prior to that are still free to use
+  |	    - Moq has some privacy breaches from v4.20, but prior to that it's ok
+19:55 (10 minutes
+  |	- Run the application
+  |	- Run the PublicApi project then the Web projects
+  |	- The styling looks broken on the basket view, but after further investigation it's not broken, it's 
+  |	  like that in the view (capital words "PRODUCT", "PRICE", etc)
+21:00 (1 hour playing with the application, cross checking with code)
+(summary for Tuesday: 3 hours approx, reading, pondering and setup)
+
+
+Wednesday 30th April 2025
+13:30 (writing the first unit test. The first is often the most challenging)
+  |	- Brought in FluentAssertion version 7 (avoiding v8+)
+  |	- Brought in Moq library version 4.18 (avoiding v4.20+)
+  |	- Wrote a first unit test for ApplicationCore
+14:51 (hour and a bit)
+  |   (writing some more unit tests)
+  |	- Wrote a few more 'happy path' unit tests for ApplicationCore (BasketService)
+15:44 (hour-ish)
+  	
+16:30 (creating tests in Infrastructure)
+  | 	- Created some DB tests for Infrastructure
+18:30 (2 hours)
+(summary for Wednesday: 4-ish hours)
+
+
+Thursday 1st May 2025
+14:00 (C# based Api tests)
+  |	- Working with C# to create Api test C# scripts within the VS solution, unit test format, with an http client
+  |	- Thinking to rely on a seeded-test database for the Api tests
+14:20 (1/2 hour-ish)
+  
+16:00 (PublicApi endpoints)
+  |	- Created Authenticate Api tests
+16:30 (1/2 hour)
+
+17:00 (Catalog item tests)
+  |	- Created a suit of Api tests and documented some gaps
+19:00 (2 hours)
+(summary for Thursday: 3 hours)
+
+
+
