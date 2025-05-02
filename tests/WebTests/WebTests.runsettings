@@ -3,7 +3,7 @@
 <RunSettings>
   <RunConfiguration>
     <EnvironmentVariables>
-      <HostTestApiBaseUrl>https://localhost:5099/api/</HostTestApiBaseUrl>
+      <HostTestBaseUrl>http://localhost:5106/</HostTestBaseUrl>
       <HostTestUsername>demouser@microsoft.com</HostTestUsername>
       <HostTestPassword>Pass@word1</HostTestPassword>
       <HostTestAdminUsername>admin@microsoft.com</HostTestAdminUsername>

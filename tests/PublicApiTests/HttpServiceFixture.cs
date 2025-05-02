@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
+﻿using System.Dynamic;
 using System.Net.Http.Json;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using FluentAssertions;
 using Newtonsoft.Json;
 
 namespace PublicApiTests;
 public class HttpServiceFixture
 {
-    //public const string JsonMediaType = "application/json";
-
-    private readonly HttpClient httpClient = new() { BaseAddress = new Uri(Environment.GetEnvironmentVariable("HostTestBaseUrl")?.ToString()) };
+    private readonly HttpClient httpClient = new() { BaseAddress = new Uri(Environment.GetEnvironmentVariable("HostTestApiBaseUrl")?.ToString()) };
     internal HttpClient HttpClient => httpClient;
 
     public static JsonContent GetTestAuthRequestContent(string? altUsername = null, string? altPassword = null)
