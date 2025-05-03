@@ -110,4 +110,14 @@ Friday 2nd May 2025
   |	- Created Basket POM, basket item mini-section POM, Login POM
 17:30 (3 hours)
 
-... WIP
+18:30 (Working on one end-to-end UI test)
+  | - Created more POM to facilitate at least one end-to-end UI test
+20:30 (2 hours)
+
+
+Saturday 3rd May 2025
+11:00 (Reviewed tests, and summary)
+  | - Fixed excessive token grab in Api tests
+  | - Fixed clear basket on empty basket in UI tests
+  | - Wrote summary
+12:30 (1.5 hours)

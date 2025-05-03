@@ -1,18 +1,19 @@
 ﻿using System.Dynamic;
-using System.Net.Http.Json;
 using FluentAssertions;
 using Newtonsoft.Json;
+using Xunit.Abstractions;
 
 namespace PublicApiTests;
 
 public class AuthenticateApiTests : IClassFixture<HttpServiceFixture>
 {
     private readonly HttpServiceFixture httpService;
+    private readonly ITestOutputHelper outputHelper;
 
-
-    public AuthenticateApiTests(HttpServiceFixture httpService)
+    public AuthenticateApiTests(HttpServiceFixture httpService, ITestOutputHelper outputHelper)
     {
         this.httpService = httpService;
+        this.outputHelper = outputHelper;
     }
 
     [Fact]
@@ -33,6 +34,7 @@ public class AuthenticateApiTests : IClassFixture<HttpServiceFixture>
         contentDict["token"].Should().BeOfType<string>();
         var actualToken = (string)contentDict["token"];
         actualToken.Should().NotBeNullOrEmpty();
+        outputHelper.WriteLine($"Actual token:{actualToken}");
 
         contentDict.Should().ContainKey("result");
         contentDict["result"].Should().BeAssignableTo<bool>();
@@ -72,11 +74,41 @@ public class AuthenticateApiTests : IClassFixture<HttpServiceFixture>
     [Fact]
     public async Task CatalogBrands_Get_Ok()
     {
+        // Arrange
+        const string expectedItemsString = @"{
+  ""catalogBrands"": [
+    {
+      ""id"": 1,
+      ""name"": ""Azure""
+    },
+    {
+      ""id"": 2,
+      ""name"": "".NET""
+    },
+    {
+      ""id"": 3,
+      ""name"": ""Visual Studio""
+    },
+    {
+      ""id"": 4,
+      ""name"": ""SQL Server""
+    },
+    {
+      ""id"": 5,
+      ""name"": ""Other""
+    }
+  ]
+}";
+        var expectedDict = JsonConvert.DeserializeObject<ExpandoObject>(expectedItemsString) as IDictionary<string, object>;
+
+        // Act
         var response = await httpService.HttpClient.GetAsync("catalog-brands");
 
+        // Assert
         response.IsSuccessStatusCode.Should().BeTrue();
 
         var stringContent = await response.Content.ReadAsStringAsync();
-        var content = JsonConvert.DeserializeObject<ExpandoObject>(stringContent);
+        var contentDict = JsonConvert.DeserializeObject<ExpandoObject>(stringContent) as IDictionary<string, object>;
+        contentDict.Should().BeEquivalentTo(expectedDict);
     }
 }

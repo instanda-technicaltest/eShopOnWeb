@@ -2,4 +2,4 @@
 
 - This project seems like a prime candidate for integration tests between BlazorAdmin and PublicApi
 - My thinking is to use WebApplicationFactory to launch PublicApi, then run integration tests by invoking BlazorAdmin functions which provoke its interaction with PublicApi
-- However, if WebApplicationFactory didn't help me facilitate this then I would attenpt the same approach but invoking PublicApi some other way
+- However, if WebApplicationFactory didn't help me facilitate this then I would attempt the same approach but invoking PublicApi some other way

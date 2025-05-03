@@ -30,7 +30,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
 		tests\GENERAL STRATEGY.txt = tests\GENERAL STRATEGY.txt
+		tests\INSTRUCTIONS.txt = tests\INSTRUCTIONS.txt
 		tests\JOURNAL WITH LOG TIMES.txt = tests\JOURNAL WITH LOG TIMES.txt
+		tests\SUMMARY.txt = tests\SUMMARY.txt
 		tests\WebTests\TEST CASE MATRIX.pdf = tests\WebTests\TEST CASE MATRIX.pdf
 	EndProjectSection
 EndProject

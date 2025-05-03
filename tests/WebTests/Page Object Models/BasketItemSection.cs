@@ -18,30 +18,38 @@ public class BasketItemSection
 
     public async Task<string?> GetImageAsync()
     {
-        await Assertions.Expect(Image).ToBeAttachedAsync(new() { Timeout = Constants.ExpectTimeoutMs });
+        await Assertions.Expect(Image).ToBeAttachedAsync();
         return await Image.GetAttributeAsync("src");
     }
+
     public async Task<string?> GetDescriptionAsync()
     {
         var look = await article.InnerHTMLAsync();
-        await Assertions.Expect(Description).ToBeAttachedAsync(new() { Timeout = Constants.ExpectTimeoutMs });
+        await Assertions.Expect(Description).ToBeAttachedAsync();
         return await Description.TextContentAsync();
     }
+
     public async Task<string?> GetPriceAsync()
     {
-        await Assertions.Expect(Price).ToBeAttachedAsync(new() { Timeout = Constants.ExpectTimeoutMs });
+        await Assertions.Expect(Price).ToBeAttachedAsync();
         return await Price.TextContentAsync();
     }
 
     public async Task<string?> GetQuantityAsync()
     {
-        await Assertions.Expect(Quantity).ToBeAttachedAsync(new() { Timeout = Constants.ExpectTimeoutMs });
+        await Assertions.Expect(Quantity).ToBeAttachedAsync();
         return await Quantity.GetAttributeAsync("value");
     }
 
     public async Task<string?> GetTotalCostAsync()
     {
-        await Assertions.Expect(TotalCost).ToBeAttachedAsync(new() { Timeout = Constants.ExpectTimeoutMs });
+        await Assertions.Expect(TotalCost).ToBeAttachedAsync();
         return await TotalCost.TextContentAsync();
+    }
+
+    public async Task SetQuantity(int newQuantity)
+    {
+        await Assertions.Expect(Quantity).ToBeAttachedAsync();
+        await Quantity.FillAsync(newQuantity.ToString());
     }
 }

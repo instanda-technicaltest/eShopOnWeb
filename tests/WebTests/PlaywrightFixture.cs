@@ -12,7 +12,7 @@ public class PlaywrightFixture : IAsyncLifetime
     public async Task InitializeAsync()
     {
         playwright = await Playwright.CreateAsync();
-        Browser = await playwright.Chromium.LaunchAsync(new() { Headless = false });
+        Browser = await playwright.Chromium.LaunchAsync( /*new() { Headless = false }*/ );
         BrowserContext = await Browser.NewContextAsync(BrowserContextOptions());
     }
 

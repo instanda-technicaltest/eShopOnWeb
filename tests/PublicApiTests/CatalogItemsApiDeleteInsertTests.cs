@@ -9,7 +9,6 @@ public class CatalogItemsApiDeleteInsertTests : IClassFixture<HttpServiceFixture
 {
     private readonly HttpServiceFixture httpService;
     private long testItemId;
-    private string? adminToken;
 
     public CatalogItemsApiDeleteInsertTests(HttpServiceFixture httpService)
     {
@@ -18,20 +17,17 @@ public class CatalogItemsApiDeleteInsertTests : IClassFixture<HttpServiceFixture
 
     private async Task<long> InsertTestItemToDeleteLaterAsync(string name)
     {
-        adminToken = await httpService.GetTestAuthTokenAsync(true);
-        adminToken.Should().NotBeNull("Test malfunction!, unable to get admin token.");
-
         var testItem = new
         {
-            catalogBrandId = int.MaxValue,
-            catalogTypeId = int.MaxValue-1,
+            catalogBrandId = 5,
+            catalogTypeId = 4,
             description = "Test item",
             name = name,
             price = 999,
             pictureUri = "https://dog.ceo/api/breeds/image/random"
         };
         var request = new HttpRequestMessage(HttpMethod.Post, "catalog-items");
-        request.Headers.Add("Authorization", "Bearer " + adminToken);
+        request.Headers.Add("Authorization", "Bearer " + httpService.AdminToken);
         request.Content = JsonContent.Create(testItem);
 
         var response = await httpService.HttpClient.SendAsync(request);
@@ -45,7 +41,7 @@ public class CatalogItemsApiDeleteInsertTests : IClassFixture<HttpServiceFixture
     private void DeleteTestCatalogItem(long testItemId)
     {
         var request = new HttpRequestMessage(HttpMethod.Delete, "catalog-items/" + testItemId);
-        request.Headers.Add("Authorization", "Bearer " + adminToken);
+        request.Headers.Add("Authorization", "Bearer " + httpService.AdminToken);
         var response = httpService.HttpClient.Send(request);
     }
 
@@ -55,25 +51,22 @@ public class CatalogItemsApiDeleteInsertTests : IClassFixture<HttpServiceFixture
         return response.StatusCode == System.Net.HttpStatusCode.NotFound;
     }
 
-    [Fact]
+    [Fact(Skip = "Test not written yet")]
     public async Task CatalogItem_Post_Ok()
     {
         /* Try to insert/POST an item.
            Then check the response is ok.
            Then get the item and assert it's the one we just inserted. */
 
-        Assert.Fail("Test not written yet");
     }
 
-    [Fact]
+    [Fact(Skip = "Test not written yet")]
     public async Task CatalogItem_Put_Ok()
     {
         /* Insert an test item.
            Alter all properties.
            Make a PUT request.
            Then get the item and assert it's the details we just updated. */
-
-        Assert.Fail("Test not written yet");
     }
 
     [Fact]
@@ -83,7 +76,7 @@ public class CatalogItemsApiDeleteInsertTests : IClassFixture<HttpServiceFixture
         testItemId = await InsertTestItemToDeleteLaterAsync(Guid.NewGuid().ToString());
 
         var deleteRequest = new HttpRequestMessage(HttpMethod.Delete, "catalog-items/" + testItemId);
-        deleteRequest.Headers.Add("Authorization", "Bearer " + adminToken);
+        deleteRequest.Headers.Add("Authorization", "Bearer " + httpService.AdminToken);
 
         // Act
         var actualResponse = httpService.HttpClient.Send(deleteRequest);
@@ -127,7 +120,7 @@ public class CatalogItemsApiDeleteInsertTests : IClassFixture<HttpServiceFixture
         var itemName = Guid.NewGuid().ToString();
         testItemId = await InsertTestItemToDeleteLaterAsync(itemName);
 
-        var nonAdminToken = await httpService.GetTestAuthTokenAsync();
+        var nonAdminToken = httpService.UserToken; 
         var deleteRequest = new HttpRequestMessage(HttpMethod.Delete, "catalog-items/" + testItemId);
         deleteRequest.Headers.Add("Authorization", "Bearer " + nonAdminToken);
 

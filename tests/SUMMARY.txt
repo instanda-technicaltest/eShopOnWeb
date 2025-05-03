@@ -1,0 +1,36 @@
+When I started there were no tests. With the coding challenge instructions of 'fast feedback' I first 
+thought of 'Shift Left', and the testing triangle came to mind.
+
+So unit tests first, then integration tests (including DB tests & Api tests), then UI tests.
+
+After I created examples of most types of test, but before I created any UI tests, I paused to create the test 
+case matrix (TEST CASE MATRIX.pdf) to check my impression of high level features against test coverage so far.
+
+Really, with shift left, I should create significantly more unit tests, and integration tests, but I wanted to make 
+a mark across most test types, and the gaps were so large I thought a few of each was a good start.
+
+The test case matrix I created is a basic first draft, and this alone could be expanded on. However it illustrates
+how I might fine tune test coverage and cross reference tests to features.
+
+I created UI tests last, but I loved this part because I really wanted to have a good play with Playwright, and I 
+love the Page Object Model way of working/thinking.
+
+Lessons learnt/regrets:
+- For the API tests I wish I had asserted Api success/failure with checks against the DB directly. As it stands, 
+  the Api tests are asserted against other Api calls, but this is not as good as asserting against the DB. Sure,
+  it will capture issues but it's not as good as it could be.
+
+- I could have created integration tests between BlazorAdmin and PublicApi, and this is a gap in my suit of tests.
+  If I had more time then I'd make a few examples of those. WebApplicationFactory<> looks like it could be good for this,
+  to host the PublicApi while BlazorAdmin runs tests against it.
+
+- I focussed on 'happy' path tests, but the suit needs more fail path tests.
+
+- The Api tests needs parameter tests, to check for dumb paramter values etc.
+
+- I mostly tested against the hosts running with an in-memory databases, but this is not ideal. I think I should have 
+  bit the bullet and got my local hosts running with LocalDB early on. In-memory databases do not fail in the same
+  way real SQL does, so it's better to use real SQL.
+
+- Given more time I'd use Playwright to produce screenshots on failures (at least), and other diagnostic info.
+

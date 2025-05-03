@@ -20,8 +20,6 @@ public class CatalogItemsApiTests : IClassFixture<HttpServiceFixture>
     public async Task CatalogItems_Multiple_Get_Ok(int? catalogBrandId, int? catalogTypeId, int[] expectedIds, string testDescription)
     {
         // Arrange
-        var token = await httpService.GetTestAuthTokenAsync();
-
         var parts = new List<string> { "catalog-items?pageSize=10" };
 
         if (catalogBrandId.HasValue)
@@ -59,7 +57,6 @@ public class CatalogItemsApiTests : IClassFixture<HttpServiceFixture>
     public async Task CatalogItems_Single_Get_Ok()
     {
         // Arrange
-        var token = await httpService.GetTestAuthTokenAsync();
         const int catalogId = 11;
         var expectedDict = new Dictionary<string, object>()
         {
@@ -82,16 +79,16 @@ public class CatalogItemsApiTests : IClassFixture<HttpServiceFixture>
         var contentDict = JsonConvert.DeserializeObject<ExpandoObject>(contentString) as IDictionary<string, object>;
 
         contentDict!.Keys.Should().HaveCount(1);
-        contentDict!.First().Key.Should().Be("catalogItem");
+        contentDict!.Single().Key.Should().Be("catalogItem");
 
         var contentItemDict = contentDict.First().Value as IDictionary<string, object>;
 
         contentItemDict.Should().BeEquivalentTo(expectedDict);
     }
 
-    [Theory]
+    [Theory(Skip = "Test not written yet")]
     [InlineData(1, 3, "Expect to get one item on notional page 3")]
-    [InlineData(3, 1, "Expect to get three item on notional page 1")]
+    [InlineData(3, 1, "Expect to get three items on notional page 1")]
     [InlineData(5, 2, "Expect to get upto five (actually one) item on notional page 2")]
     public async Task CatalogItems_Paging_Ok(int pageSize, int pageIndex, string description)
     {
@@ -102,6 +99,5 @@ public class CatalogItemsApiTests : IClassFixture<HttpServiceFixture>
            Using the inline data we can test the NUMBER of items returned on the page. 
            I think that's all we need to do here. */
 
-        Assert.Fail("Test not written yet");
     }
 }

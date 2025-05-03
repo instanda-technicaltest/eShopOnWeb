@@ -1,0 +1,9 @@
+All tests can be run with `dotnet test` from the solution root.
+
+The WebTests and PublicApiTests need the host to be running. They are currently set up to test against a running 
+docker instance.
+
+Tests have a project level .runsettings file with environment variables which the tests use for the host url, 
+username and passwords.
+
+In a pipeline these environment variables can be set from script variables or pipeline secrets.

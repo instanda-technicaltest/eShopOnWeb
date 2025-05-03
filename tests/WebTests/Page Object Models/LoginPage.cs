@@ -27,7 +27,7 @@ public class LoginPage
         else
             return null;
     }
-    public async Task<IndexPage?> ClickRegisterAsync()
+    public async Task<object?/*RegisterPage?*/> ClickRegisterAsync()
     {
         await Assertions.Expect(RegisterButton).ToBeAttachedAsync();
         await RegisterButton.ClickAsync();
@@ -39,9 +39,16 @@ public class LoginPage
         await Assertions.Expect(EmailInput).ToBeAttachedAsync();
         await EmailInput.FillAsync(email);
     }
+
     public async Task EnterPassword(string password)
     {
         await Assertions.Expect(PasswordInput).ToBeAttachedAsync();
         await PasswordInput.FillAsync(password);
-    } 
+    }
+
+    public async Task EnterEmailAndPassword(string username, string password)
+    {
+        await EnterEmail(username);
+        await EnterPassword(password);
+    }
 }

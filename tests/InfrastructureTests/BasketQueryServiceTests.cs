@@ -23,7 +23,7 @@ public class BasketQueryServiceTests : IClassFixture<TestDatabaseFixture>
         testBasket.AddItem(10, 100.0m, 1);
         testBasket.AddItem(20, 200.0m, 2);
 
-        const int expectedQuantity = 3;
+        const int expectedQuantity = 3; 
 
         testDatabaseFixture.Context.Baskets.Add(testBasket);
         testDatabaseFixture.Context.SaveChanges();
