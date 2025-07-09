@@ -21,7 +21,6 @@ public static class TestHelper
     public static async Task ContinueShopping(IPage page)
     {
         await page.ClickAsync(".btn.esh-basket-checkout.text-white");
-        //await page.GetByRole(AriaRole.Link, new() { Name = "[ Continue Shopping ]" }).ClickAsync();
     }
 
     public static async Task Checkout(IPage page)
@@ -39,6 +38,19 @@ public static class TestHelper
         await page.GetByRole(AriaRole.Heading, new() { NameString = "Basket is empty." }).ClickAsync();
         await page.GetByRole(AriaRole.Link, new() { NameString = "[ Continue Shopping ]" }).ClickAsync();
 
+    }
+
+    public static async Task FilterItems(IPage page)
+    {
+        await page.GetByRole(AriaRole.Combobox, new() { NameString = "type" }).SelectOptionAsync(new[] { "1" });
+        await page.GetByRole(AriaRole.Button, new() { NameString = "Submit" }).ClickAsync();
+        await Assertions.Expect(page.Locator("text=.NET Black & White Mug 8.50")).ToBeVisibleAsync();
+
+    }
+
+    public static async Task Logout(IPage page)
+    {
+        await page.GetByRole(AriaRole.Link, new() { NameString = "Log Out" }).ClickAsync();
     }
 }
 

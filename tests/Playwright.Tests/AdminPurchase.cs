@@ -19,6 +19,8 @@ public class AdminPurchase : BasePlaywrightTest
         await Page.ClickAsync("button[type='submit']");
 
         await TestHelper.Checkout(Page);
+
+        await TestHelper.Logout(Page);
     }
 }
 

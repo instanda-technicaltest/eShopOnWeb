@@ -20,6 +20,8 @@ public class UserPurchaseTests : BasePlaywrightTest
         await TestHelper.AddItemToBasket(Page);
 
         await TestHelper.Checkout(Page);
+
+        await TestHelper.Logout(Page);
     }
 
     [Test]
@@ -33,6 +35,8 @@ public class UserPurchaseTests : BasePlaywrightTest
         await TestHelper.AddItemToBasket(Page);
 
         await TestHelper.Checkout(Page);
+
+        await TestHelper.Logout(Page);
     }
 
     [Test]
@@ -44,6 +48,18 @@ public class UserPurchaseTests : BasePlaywrightTest
         await TestHelper.AddItemToBasket(Page);
 
         await TestHelper.RemoveItemFromCheckout(Page);
+
+        await TestHelper.Logout(Page);
+    }
+    [Test]
+    public async Task FilterProducts()
+    {
+        await Page.GotoAsync($"{BaseUrl}");
+        await TestHelper.SignIn(Page, email, password);
+
+        await TestHelper.FilterItems(Page);
+
+        await TestHelper.Logout(Page);
     }
 
 }
