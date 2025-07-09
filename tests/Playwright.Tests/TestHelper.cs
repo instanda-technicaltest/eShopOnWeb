@@ -18,11 +18,17 @@ public static class TestHelper
         await page.Locator("input[type='submit']").Nth(1).ClickAsync();
     }
 
+    public static async Task ContinueShopping(IPage page)
+    {
+        await page.ClickAsync(".btn.esh-basket-checkout.text-white");
+        //await page.GetByRole(AriaRole.Link, new() { Name = "[ Continue Shopping ]" }).ClickAsync();
+    }
+
     public static async Task Checkout(IPage page)
     {
         await page.GetByRole(AriaRole.Link, new() { NameString = "[ Checkout ]" }).ClickAsync();
         await page.GetByRole(AriaRole.Button, new() { NameString = "[ Pay Now ]" }).ClickAsync();
-        await page.GetByRole(AriaRole.Heading, new() { NameString = "Thanks for your Order!" }).ClickAsync();
+        await Assertions.Expect(page.Locator("text=Thanks for your Order!")).ToBeVisibleAsync();
     }
 
     public static async Task RemoveItemFromCheckout(IPage page)
