@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.Playwright;
-
-namespace Playwright.Tests;
+﻿namespace Playwright.Tests;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]

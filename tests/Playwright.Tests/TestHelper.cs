@@ -1,6 +1,4 @@
 ﻿using Microsoft.Playwright;
-using System.Diagnostics.CodeAnalysis;
-
 
 namespace Playwright.Tests;
 public static class TestHelper
