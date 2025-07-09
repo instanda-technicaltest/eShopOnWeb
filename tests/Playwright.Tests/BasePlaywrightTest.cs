@@ -15,7 +15,7 @@ public abstract class BasePlaywrightTest : PageTest
     [SetUp]
     public async Task SetUp()
     {
-        Browser = await Playwright.Chromium.LaunchAsync(new() { Headless = false });
+        Browser = await Playwright.Chromium.LaunchAsync(new() { Headless = true });
         Context = await Browser.NewContextAsync(new() { Locale = "en-GB" });
         Context.SetDefaultTimeout(60000);
         Page = await Context.NewPageAsync();
