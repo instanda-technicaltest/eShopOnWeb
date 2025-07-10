@@ -25,7 +25,9 @@ public class AdminPurchase : BasePlaywrightTest
         await TestHelper.SignIn(Page, email, password);
 
         await TestHelper.AddItemToBasket(Page);
+
         await TestHelper.ContinueShopping(Page);
+
         await TestHelper.AddItemToBasket(Page);
 
         await TestHelper.Checkout(Page);
