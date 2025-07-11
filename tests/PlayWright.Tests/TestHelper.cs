@@ -30,7 +30,6 @@ public static class TestHelper
 
     public static async Task RemoveItemFromCheckout(IPage page)
     {
-        await page.Locator("input[name=\"Items\\[0\\]\\.Quantity\"]").ClickAsync();
         await page.Locator("input[name=\"Items\\[0\\]\\.Quantity\"]").FillAsync("0");
         await page.GetByRole(AriaRole.Button, new() { NameString = "[ Update ]" }).ClickAsync();
         await page.GetByRole(AriaRole.Heading, new() { NameString = "Basket is empty." }).ClickAsync();
