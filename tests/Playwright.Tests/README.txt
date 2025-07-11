@@ -1,6 +1,6 @@
 Readme
 
-To run the playwright tests within the repository the following things must happen:
+To run the playwright tests within the repository do a clean and build and then the following things must happen:
 
 	- The application must be running locally
 
