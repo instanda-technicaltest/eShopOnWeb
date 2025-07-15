@@ -34,7 +34,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Run Playwright Tests
-      run: dotnet test tests/Playwright.Tests/Playwright.Tests.csproj --filter Category=E2E
+      run: dotnet test tests/Playwright.Tests/Playwright.Tests.csproj
 
     - name: Upload HTML Test Report
       if: always()
