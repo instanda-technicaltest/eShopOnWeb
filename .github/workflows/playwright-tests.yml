@@ -25,9 +25,8 @@ jobs:
         node-version: '18'
 
     - name: Install Playwright Browsers
-      run: |
-        npm install -g playwright
-        playwright install --with-deps
+      run: npm install -g playwright
+           playwright install --with-deps
 
     - name: Restore .NET Solution
       run: dotnet restore
