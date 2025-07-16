@@ -1,0 +1,22 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tests": "dotenv -e .env -- npx playwright test --ui",
+    "tests:headless": "dotenv -e .env -- npx playwright test",
+    "tests:staging": "dotenv -e .env.staging -- npx playwright test --ui",
+    "report": "npx playwright show-report"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv-cli": "^8.0.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.0.14"
+  }
+}

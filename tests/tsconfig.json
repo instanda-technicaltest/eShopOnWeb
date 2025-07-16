@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "useUnknownInCatchVariables": false,
+        "module": "CommonJS",
+        "target": "ES6",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "outDir": "build",
+        "removeComments": true,
+        "strict": true,
+        "pretty": true,
+        "baseUrl": ".",
+        "paths": {
+            "*": ["node_modules/*"],
+            "@/*": ["src/*"], // Maps "@/path" to "src/path"
+            "@test/*": ["test/*"] // Maps "@test/path" to "test/path"
+        },
+        "skipLibCheck": true,
+        "typeRoots": ["./src/types", "./node_modules/@types/"]
+    },
+    "exclude": [
+        "**/__mocks__/*",
+        "node_modules",
+        "./node_modules",
+        "./node_modules/*",
+        "./node_modules/@types/node/index.d.ts"
+    ],
+    "include": ["src/**/*.ts"]
+}
